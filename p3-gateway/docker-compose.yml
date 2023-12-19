@@ -1,0 +1,38 @@
+version: '3.8'
+
+networks:
+  lltodo_network:
+    external: true
+
+services:
+  gateway:
+    image: 'openjdk:17'
+    networks:
+      - lltodo_network
+#    ports:
+#      - '8081:8081'
+    volumes:
+      - ./app:/app
+    environment:
+      TZ: Asia/Shanghai
+      P3_WMS_GATEWAY_NAME: p3-gateway
+      P3_WMS_GATEWAY_PORT: 8081
+      P3_WMS_NACOS_ADDR: nacos.local.httpill.com
+      P3_WMS_NACOS_USERNAME: lltodo
+      P3_WMS_NACOS_PASSWORD: zaq1ZAQ!
+      P3_WMS_NACOS_CONFIG_NAMESPACE: 64ca55c4-5781-4008-ae29-1d5c4f5d8cdc
+      P3_WMS_NACOS_CONFIG_GROUP: p3-services
+      P3_WMS_GATEWAY_PROFILES_ACTIVE: dev
+      P3_WMS_NACOS_CONFIG_SECRET_KEY: TkFDT1NfQVVUSF9TRUNSRVRfS0VZX2xsdG9kb19OQUNPU19BVVRIX1NFQ1JFVF9LRVk=
+    working_dir: /app
+#    command: [ "/bin/sh", "-c", "mkdir -p /app/$$HOSTNAME/logs && java -jar p3-gateway.jar > /app/$$HOSTNAME/logs/runtime.log 2>&1" ]
+    command: ["java", "-jar", "p3-gateway.jar"]
+    restart: always
+    deploy:
+      resources:
+        limits:
+          cpus: '0.5'
+          memory: 256m
+        reservations:
+          cpus: '0.25'
+          memory: 128m

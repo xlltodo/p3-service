@@ -1,0 +1,27 @@
+server:
+  port: ${P3_WMS_GATEWAY_PORT}
+
+spring:
+  application:
+    name: ${P3_WMS_GATEWAY_NAME}
+
+  cloud:
+    nacos:
+      discovery:
+        server-addr: ${P3_WMS_NACOS_ADDR}
+        username: ${P3_WMS_NACOS_USERNAME}
+        password: ${P3_WMS_NACOS_PASSWORD}
+        namespace: ${P3_WMS_NACOS_CONFIG_NAMESPACE}
+        group: ${P3_WMS_NACOS_CONFIG_GROUP}
+        secret-key: ${P3_WMS_NACOS_CONFIG_SECRET_KEY}
+      config:
+        server-addr: ${P3_WMS_NACOS_ADDR}
+        username: ${P3_WMS_NACOS_USERNAME}
+        password: ${P3_WMS_NACOS_PASSWORD}
+        namespace: ${P3_WMS_NACOS_CONFIG_NAMESPACE}
+        group: ${P3_WMS_NACOS_CONFIG_GROUP}
+        secret-key: ${P3_WMS_NACOS_CONFIG_SECRET_KEY}
+
+  config:
+    import:
+      - optional:nacos:application-${P3_WMS_GATEWAY_PROFILES_ACTIVE}.yml

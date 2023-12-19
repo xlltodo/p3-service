@@ -1,0 +1,27 @@
+server:
+  port: 8081
+
+spring:
+  application:
+    name: p3-gateway
+
+  cloud:
+    nacos:
+      discovery:
+        server-addr: nacos.local.httpill.com:8848
+        username: lltodo
+        password: zaq1ZAQ!
+        namespace: 64ca55c4-5781-4008-ae29-1d5c4f5d8cdc
+        group: p3-services
+        secret-key: TkFDT1NfQVVUSF9TRUNSRVRfS0VZX2xsdG9kb19OQUNPU19BVVRIX1NFQ1JFVF9LRVk=
+      config:
+        server-addr: nacos.local.httpill.com:8848
+        username: lltodo
+        password: zaq1ZAQ!
+        namespace: 64ca55c4-5781-4008-ae29-1d5c4f5d8cdc
+        group: p3-services
+        secret-key: TkFDT1NfQVVUSF9TRUNSRVRfS0VZX2xsdG9kb19OQUNPU19BVVRIX1NFQ1JFVF9LRVk=
+
+  config:
+    import:
+      - optional:nacos:application-dev.yml

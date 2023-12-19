@@ -1,0 +1,105 @@
+version: '3.8'
+
+networks:
+  lltodo_network:
+    external: true
+
+services:
+  nacos1:
+    image: nacos/nacos-server:latest
+    container_name: nacos1
+    networks:
+      - lltodo_network
+    environment:
+      NACOS_SERVERS: nacos1,nacos2,nacos3
+      NACOS_AUTH_ENABLE: true
+      NACOS_AUTH_SECRET_KEY: TkFDT1NfQVVUSF9TRUNSRVRfS0VZX2xsdG9kb19OQUNPU19BVVRIX1NFQ1JFVF9LRVk=
+      NACOS_AUTH_IDENTITY_KEY: TkFDT1NfQVVUSF9JREVOVElUWV9LRVlfbGx0b2RvX05BQ09TX0FVVEhfSURFTlRJVFlfS0VZ
+      NACOS_AUTH_IDENTITY_VALUE: TkFDT1NfQVVUSF9JREVOVElUWV9WQUxVRV9sbHRvZG9fTkFDT1NfQVVUSF9JREVOVElUWV9WQUxVRQ==
+      NACOS_AUTH_TOKEN: TkFDT1NfQVVUSF9UT0tFTl9sbHRvZG9fTkFDT1NfQVVUSF9UT0tFTg==
+      SPRING_DATASOURCE_PLATFORM: mysql
+      MYSQL_SERVICE_HOST: mysql
+      MYSQL_SERVICE_DB_NAME: nacos
+      MYSQL_SERVICE_PORT: 3306
+      MYSQL_SERVICE_USER: lltodo
+      MYSQL_SERVICE_PASSWORD: zaq1ZAQ!
+    volumes:
+      - ./nacos1/logs:/var/log/nacos
+      - ./nacos1/data:/home/nacos/data
+      - ./nacos1/snapshot:/home/nacos/snapshot
+    restart: always
+    deploy:
+      resources:
+        limits:
+          cpus: '1'
+          memory: 1g
+        reservations:
+          cpus: '0.5'
+          memory: 1g
+
+  nacos2:
+    image: nacos/nacos-server:latest
+    container_name: nacos2
+    networks:
+      - lltodo_network
+    environment:
+      NACOS_SERVERS: nacos1,nacos2,nacos3
+      NACOS_AUTH_ENABLE: true
+      NACOS_AUTH_SECRET_KEY: TkFDT1NfQVVUSF9TRUNSRVRfS0VZX2xsdG9kb19OQUNPU19BVVRIX1NFQ1JFVF9LRVk=
+      NACOS_AUTH_IDENTITY_KEY: TkFDT1NfQVVUSF9JREVOVElUWV9LRVlfbGx0b2RvX05BQ09TX0FVVEhfSURFTlRJVFlfS0VZ
+      NACOS_AUTH_IDENTITY_VALUE: TkFDT1NfQVVUSF9JREVOVElUWV9WQUxVRV9sbHRvZG9fTkFDT1NfQVVUSF9JREVOVElUWV9WQUxVRQ==
+      NACOS_AUTH_TOKEN: TkFDT1NfQVVUSF9UT0tFTl9sbHRvZG9fTkFDT1NfQVVUSF9UT0tFTg==
+      SPRING_DATASOURCE_PLATFORM: mysql
+      MYSQL_SERVICE_HOST: mysql
+      MYSQL_SERVICE_DB_NAME: nacos
+      MYSQL_SERVICE_PORT: 3306
+      MYSQL_SERVICE_USER: lltodo
+      MYSQL_SERVICE_PASSWORD: zaq1ZAQ!
+    volumes:
+      - ./nacos2/logs:/var/log/nacos
+      - ./nacos2/data:/home/nacos/data
+      - ./nacos2/snapshot:/home/nacos/snapshot
+    depends_on:
+      - nacos1
+    restart: always
+    deploy:
+      resources:
+        limits:
+          cpus: '1'
+          memory: 1g
+        reservations:
+          cpus: '0.5'
+          memory: 1g
+  nacos3:
+    image: nacos/nacos-server:latest
+    container_name: nacos3
+    networks:
+      - lltodo_network
+    environment:
+      NACOS_SERVERS: nacos1,nacos2,nacos3
+      NACOS_AUTH_ENABLE: true
+      NACOS_AUTH_SECRET_KEY: TkFDT1NfQVVUSF9TRUNSRVRfS0VZX2xsdG9kb19OQUNPU19BVVRIX1NFQ1JFVF9LRVk=
+      NACOS_AUTH_IDENTITY_KEY: TkFDT1NfQVVUSF9JREVOVElUWV9LRVlfbGx0b2RvX05BQ09TX0FVVEhfSURFTlRJVFlfS0VZ
+      NACOS_AUTH_IDENTITY_VALUE: TkFDT1NfQVVUSF9JREVOVElUWV9WQUxVRV9sbHRvZG9fTkFDT1NfQVVUSF9JREVOVElUWV9WQUxVRQ==
+      NACOS_AUTH_TOKEN: TkFDT1NfQVVUSF9UT0tFTl9sbHRvZG9fTkFDT1NfQVVUSF9UT0tFTg==
+      SPRING_DATASOURCE_PLATFORM: mysql
+      MYSQL_SERVICE_HOST: mysql
+      MYSQL_SERVICE_DB_NAME: nacos
+      MYSQL_SERVICE_PORT: 3306
+      MYSQL_SERVICE_USER: lltodo
+      MYSQL_SERVICE_PASSWORD: zaq1ZAQ!
+    volumes:
+      - ./nacos3/logs:/var/log/nacos
+      - ./nacos3/data:/home/nacos/data
+      - ./nacos3/snapshot:/home/nacos/snapshot
+    depends_on:
+      - nacos2
+    restart: always
+    deploy:
+      resources:
+        limits:
+          cpus: '1'
+          memory: 1g
+        reservations:
+          cpus: '0.5'
+          memory: 1g

@@ -1,0 +1,28 @@
+server:
+  port: ${P3_WMS_SECURITY_PORT}
+
+spring:
+  application:
+    name: ${P3_WMS_SECURITY_NAME}
+
+  cloud:
+    nacos:
+      discovery:
+        server-addr: ${P3_WMS_NACOS_ADDR}
+        username: ${P3_WMS_NACOS_USERNAME}
+        password: ${P3_WMS_NACOS_PASSWORD}
+        namespace: ${P3_WMS_NACOS_CONFIG_NAMESPACE}
+        group: ${P3_WMS_NACOS_CONFIG_GROUP}
+        watch:
+          enabled: true
+        watch-delay: 30000
+      config:
+        server-addr: ${P3_WMS_NACOS_ADDR}
+        username: ${P3_WMS_NACOS_USERNAME}
+        password: ${P3_WMS_NACOS_PASSWORD}
+        namespace: ${P3_WMS_NACOS_CONFIG_NAMESPACE}
+        group: ${P3_WMS_NACOS_CONFIG_GROUP}
+
+  config:
+    import:
+      - optional:nacos:application-${P3_WMS_SECURITY_PROFILES_ACTIVE}.yml
