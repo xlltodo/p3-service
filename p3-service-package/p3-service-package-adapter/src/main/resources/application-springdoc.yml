@@ -1,0 +1,24 @@
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html
+    tags-sorter: alpha
+    operations-sorter: alpha
+  api-docs:
+    path: /v3/api-docs
+  group-configs:
+    - group: 'default'
+      paths-to-match: '/**'
+      packages-to-scan: com.p3.service.packages.adapter.controller
+
+knife4j:
+  enable: true
+  openapi:
+    email: lltodo@icloud.com
+    concat: lltodo
+    group:
+      hello:
+        group-name: 首页
+        path-rule: regex
+        api-rule: package
+        api-rule-resources:
+          - com.p3.service.packages.adapter.controller
