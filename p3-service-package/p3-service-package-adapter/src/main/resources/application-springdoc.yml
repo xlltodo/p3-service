@@ -8,7 +8,7 @@ springdoc:
   group-configs:
     - group: 'default'
       paths-to-match: '/**'
-      packages-to-scan: com.p3.service.packages.adapter.controller
+      packages-to-scan: com.p3.service.packages.adapter.v1.api
 
 knife4j:
   enable: true
@@ -21,4 +21,4 @@ knife4j:
         path-rule: regex
         api-rule: package
         api-rule-resources:
-          - com.p3.service.packages.adapter.controller
+          - com.p3.service.packages.adapter.v1.api

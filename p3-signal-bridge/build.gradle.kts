@@ -1,3 +1,3 @@
 plugins {
-    `java-base`
+    `java-platform`
 }

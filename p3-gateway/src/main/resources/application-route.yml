@@ -1,0 +1,25 @@
+spring:
+  cloud:
+    gateway:
+      globalCors:
+        corsConfigurations:
+          '[/**]':
+            allowedOrigins: "http://p3.yuntai-test.com"
+            allowedMethods:
+              - "*"
+      discovery:
+        locator:
+          enabled: true
+      routes:
+        - id: p3-service-package-route
+          uri: lb://p3-service-package
+          predicates:
+            - Path=/p3-service-package/**
+          filters:
+            - StripPrefix=1
+        - id: p3-wms-route
+          uri: lb://p3-wms
+          predicates:
+            - Path=/p3-wms/**
+          filters:
+            - StripPrefix=1

@@ -11,3 +11,10 @@ spring:
 #      port: 6379
 #      password: INb3<]C7{TjO
 #      database: 1
+
+mybatis-plus:
+  global-config:
+    db-config:
+      logic-delete-field: deleted
+      logic-delete-value: 1
+      logic-not-delete-value: 0

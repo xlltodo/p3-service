@@ -1,6 +1,17 @@
 server:
   port: 8901
 
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+
+logging:
+  config: classpath:logback-config.xml
+  level:
+    org.springframework: info
+
 spring:
   application:
     name: p3-service-package
@@ -9,12 +20,24 @@ spring:
     time-zone: GMT+8
     date-format: yyyy-MM-dd HH:mm:ss
 
-  profiles:
-    include:
-      - datasource
-      - springdoc
+  cloud:
+    nacos:
+      discovery:
+        server-addr: nacos.p3.yuntai-test.com:8848
+        username: lltodo
+        password: zaq1ZAQ!
+        namespace: 64ca55c4-5781-4008-ae29-1d5c4f5d8cdc
+        group: p3-dev
+        secret-key: TkFDT1NfQVVUSF9TRUNSRVRfS0VZX2xsdG9kb19OQUNPU19BVVRIX1NFQ1JFVF9LRVk=
+      config:
+        server-addr: nacos.p3.yuntai-test.com:8848
+        username: lltodo
+        password: zaq1ZAQ!
+        namespace: 64ca55c4-5781-4008-ae29-1d5c4f5d8cdc
+        group: p3-dev
+        secret-key: TkFDT1NfQVVUSF9TRUNSRVRfS0VZX2xsdG9kb19OQUNPU19BVVRIX1NFQ1JFVF9LRVk=
 
-logging:
-  config: classpath:logback-dev.xml
-  level:
-    org.springframework: info
+  config:
+    import:
+      - optional:nacos:application-datasource.yml
+      - optional:nacos:application-springdoc.yml

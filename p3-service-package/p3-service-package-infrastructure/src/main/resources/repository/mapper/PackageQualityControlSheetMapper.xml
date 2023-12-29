@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.p3.service.packages.infrastructure.repository.mapper.PackageQualityControlSheetMapper">
+
+    <resultMap id="BaseResultMap" type="com.p3.service.packages.infrastructure.repository.entity.PackageQualityControlSheetEntity">
+            <id property="id" column="id" jdbcType="VARCHAR"/>
+            <result property="expressBillNumber" column="express_bill_number" jdbcType="VARCHAR"/>
+            <result property="customerCode" column="customer_code" jdbcType="VARCHAR"/>
+            <result property="storageLocation" column="storage_location" jdbcType="VARCHAR"/>
+            <result property="expectedPackageCount" column="expected_package_count" jdbcType="INTEGER"/>
+            <result property="actualPackageCount" column="actual_package_count" jdbcType="INTEGER"/>
+            <result property="expectedProductCount" column="expected_product_count" jdbcType="INTEGER"/>
+            <result property="actualProductCount" column="actual_product_count" jdbcType="INTEGER"/>
+            <result property="totalProductValue" column="total_product_value" jdbcType="DECIMAL"/>
+            <result property="warehouseCode" column="warehouse_code" jdbcType="VARCHAR"/>
+            <result property="warehouseName" column="warehouse_name" jdbcType="VARCHAR"/>
+            <result property="destinationRegionCode" column="destination_region_code" jdbcType="VARCHAR"/>
+            <result property="destinationRegionName" column="destination_region_name" jdbcType="VARCHAR"/>
+            <result property="expressCompanyCode" column="express_company_code" jdbcType="VARCHAR"/>
+            <result property="expressCompanyName" column="express_company_name" jdbcType="VARCHAR"/>
+            <result property="packageStatus" column="package_status" jdbcType="VARCHAR"/>
+            <result property="inspectorId" column="inspector_id" jdbcType="VARCHAR"/>
+            <result property="inspectorName" column="inspector_name" jdbcType="VARCHAR"/>
+            <result property="inspectionTime" column="inspection_time" jdbcType="TIMESTAMP"/>
+            <result property="originalProductRemarks" column="original_product_remarks" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,express_bill_number,customer_code,
+        storage_location,expected_package_count,actual_package_count,
+        expected_product_count,actual_product_count,total_product_value,
+        warehouse_code,warehouse_name,destination_region_code,
+        destination_region_name,express_company_code,express_company_name,
+        package_status,inspector_id,inspector_name,
+        inspection_time,original_product_remarks
+    </sql>
+</mapper>

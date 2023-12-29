@@ -46,9 +46,42 @@ subprojects {
             }
 
             dependencies {
+                dependency("com.baomidou:mybatis-plus-annotation:${project.findProperty("mybatisPlusVersion")}")
                 dependency("com.baomidou:mybatis-plus-boot-starter:${project.findProperty("mybatisPlusVersion")}")
-                dependency("jakarta.annotation:jakarta.annotation-api:${project.findProperty("jakartaVersion")}")
+                dependency("jakarta.annotation:jakarta.annotation-api:${project.findProperty("JakartaAnnotationsVersion")}")
+                dependency("jakarta.validation:jakarta.validation-api:${project.findProperty("jakartaValidationVersion")}")
                 dependency("org.projectlombok:lombok:${project.findProperty("lombokVersion")}")
+                dependency("com.mysql:mysql-connector-j:${project.findProperty("mysqlConnectorVersion")}")
+                dependency("io.swagger.core.v3:swagger-annotations:${project.findProperty("swaggerVersion")}")
+                dependency("com.github.xiaoymin:knife4j-openapi3-jakarta-spring-boot-starter:${project.findProperty("knife4jVersion")}")
+            }
+        }
+    }
+
+    plugins.withType<JavaLibraryPlugin> {
+
+        apply(plugin = "io.spring.dependency-management")
+
+        configure<JavaPluginExtension> {
+            sourceCompatibility = JavaVersion.VERSION_17
+            targetCompatibility = JavaVersion.VERSION_17
+        }
+
+        dependencyManagement {
+
+            imports {
+                mavenBom("org.springframework.boot:spring-boot-dependencies:${project.findProperty("springBootVersion")}")
+                mavenBom("org.springframework.cloud:spring-cloud-dependencies:${project.findProperty("springCloudVersion")}")
+                mavenBom("com.alibaba.cloud:spring-cloud-alibaba-dependencies:${project.findProperty("springCloudAlibabaVersion")}")
+            }
+
+            dependencies {
+                dependency("com.baomidou:mybatis-plus-annotation:${project.findProperty("mybatisPlusVersion")}")
+                dependency("com.baomidou:mybatis-plus-boot-starter:${project.findProperty("mybatisPlusVersion")}")
+                dependency("jakarta.annotation:jakarta.annotation-api:${project.findProperty("JakartaAnnotationsVersion")}")
+                dependency("jakarta.validation:jakarta.validation-api:${project.findProperty("jakartaValidationVersion")}")
+                dependency("org.projectlombok:lombok:${project.findProperty("lombokVersion")}")
+                dependency("com.mysql:mysql-connector-j:${project.findProperty("mysqlConnectorVersion")}")
                 dependency("io.swagger.core.v3:swagger-annotations:${project.findProperty("swaggerVersion")}")
                 dependency("com.github.xiaoymin:knife4j-openapi3-jakarta-spring-boot-starter:${project.findProperty("knife4jVersion")}")
             }
