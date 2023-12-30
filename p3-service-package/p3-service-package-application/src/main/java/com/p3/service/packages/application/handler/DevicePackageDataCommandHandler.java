@@ -11,6 +11,9 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
 
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 import java.util.Optional;
 
 @Slf4j
@@ -27,7 +30,17 @@ public class DevicePackageDataCommandHandler {
 
         Optional<PackageProcessedRecord> packageProcessedRecordOptional = Optional.ofNullable(repository.save(PackageProcessedRecordAssembler.toEntity(command)));
         packageProcessedRecordOptional.ifPresent(PackageProcessedRecord::sendExpressPackageReceipt);
-        log.info("签收包裹：{}", forecastExpressClient.expressReceipt(new ForecastExpressReceiptDTO().setExpressNumber(command.getMachine())));
+        List<ForecastExpressReceiptDTO> forecastExpressReceiptDTOS = Collections.singletonList(new ForecastExpressReceiptDTO()
+                .setExpressNumber(command.getTicketsNum())
+                .setLength(command.getLength())
+                .setWidth(command.getWidth())
+                .setHeight(command.getHeight())
+                .setWeight(command.getWeight())
+                .setVolume(command.getVolume())
+                .setMachine(command.getMachine())
+        );
+        log.info("签收包裹参数：{}", forecastExpressReceiptDTOS);
+        log.info("签收包裹响应：{}", forecastExpressClient.expressReceipt(forecastExpressReceiptDTOS));
         return packageProcessedRecordOptional.isPresent();
     }
 

@@ -10,13 +10,13 @@ import java.util.List;
 public class ForecastExpressReceiptDTO {
 
     private String requestId;
-    private int id;
+    private Integer id;
     private String expressNumber;
-    private double length;
-    private double width;
-    private double height;
-    private double weight;
-    private double volume;
+    private Double length;
+    private Double width;
+    private Double height;
+    private Double weight;
+    private Double volume;
     private List<String> receivedImg;
     private String machine;
     private String receivedTime;

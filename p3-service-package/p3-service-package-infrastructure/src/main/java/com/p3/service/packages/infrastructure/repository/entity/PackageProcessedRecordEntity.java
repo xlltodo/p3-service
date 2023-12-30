@@ -69,4 +69,5 @@ public class PackageProcessedRecordEntity implements Serializable {
      */
     @TableField(value = "machine")
     private String machine;
+
 }

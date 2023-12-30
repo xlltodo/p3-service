@@ -16,4 +16,5 @@ dependencies {
     annotationProcessor("org.projectlombok:lombok")
     implementation("org.springframework.boot:spring-boot-starter-validation")
     compileOnly("io.swagger.core.v3:swagger-annotations")
+    compileOnly("com.fasterxml.jackson.core:jackson-annotations")
 }

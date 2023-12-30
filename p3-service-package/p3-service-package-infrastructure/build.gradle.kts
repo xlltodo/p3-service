@@ -12,6 +12,7 @@ dependencies {
     api("com.baomidou:mybatis-plus-boot-starter")
     api("org.springframework.cloud:spring-cloud-starter-openfeign")
     api("org.springframework.cloud:spring-cloud-starter-loadbalancer")
+    api("org.redisson:redisson-spring-boot-starter")
     api("org.springframework:spring-webflux")
 
 //    工具依赖

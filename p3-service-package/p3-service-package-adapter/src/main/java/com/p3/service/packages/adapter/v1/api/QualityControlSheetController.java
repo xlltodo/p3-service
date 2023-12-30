@@ -9,10 +9,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.annotation.Resource;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @Tag(name = "QC入库")
 @RestController
@@ -38,7 +35,7 @@ public class QualityControlSheetController {
 
     @Operation(summary = "保存并提交")
     @PostMapping("/submit")
-    public ApiResponse<Boolean> submit(@Validated QualityControlSheetCommand command) {
+    public ApiResponse<Boolean> submit(@Validated @RequestBody QualityControlSheetCommand command) {
 
         return ApiResponse.success(qualityControlSheetCommandHandler.submit(command));
     }

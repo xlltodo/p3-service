@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.p3.service.packages.infrastructure.repository.mapper.PackageTrackingNumberMapper">
+
+    <resultMap id="BaseResultMap" type="com.p3.service.packages.infrastructure.repository.entity.PackageTrackingNumberEntity">
+            <result property="id" column="id" jdbcType="VARCHAR"/>
+            <result property="packageCode" column="package_code" jdbcType="VARCHAR"/>
+            <result property="numberType" column="number_type" jdbcType="VARCHAR"/>
+            <result property="trackingNumber" column="tracking_number" jdbcType="VARCHAR"/>
+            <result property="creationTime" column="creation_time" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,package_code,number_type,
+        tracking_number,creation_time
+    </sql>
+</mapper>

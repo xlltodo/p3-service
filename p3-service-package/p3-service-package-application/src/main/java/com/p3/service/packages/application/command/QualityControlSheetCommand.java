@@ -1,5 +1,6 @@
 package com.p3.service.packages.application.command;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.*;
 import lombok.Data;
@@ -23,7 +24,7 @@ public class QualityControlSheetCommand implements Serializable {
     @Schema(description = "快递单号")
     private String expressBillNumber;
 
-    @NotBlank(message = "质检单包裹信息不能为空")
+    @NotEmpty(message = "质检单包裹信息不能为空")
     @Schema(description = "质检单包裹信息")
     private List<QualityControlSheetPackageCommand> packages;
 
@@ -98,6 +99,7 @@ public class QualityControlSheetCommand implements Serializable {
 
     @NotNull(message = "质检时间不能为空")
     @Schema(description = "质检时间")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime inspectionTime;
 
     @Size(max = 500, message = "原始商品备注不能超过500个字符")

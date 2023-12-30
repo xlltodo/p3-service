@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
+import lombok.experimental.Accessors;
 
 import java.io.Serial;
 import java.io.Serializable;
@@ -14,12 +15,12 @@ import java.math.BigDecimal;
  * @TableName package_main_info
  */
 @Data
+@Accessors(chain = true)
 @TableName(value ="package_main_info")
 public class PackageMainInfoEntity implements Serializable {
 
     @Serial
     private static final long serialVersionUID = -5590735685789681282L;
-
     /**
      * 主键ID
      */
@@ -90,7 +91,7 @@ public class PackageMainInfoEntity implements Serializable {
      * 集包标识
      */
     @TableField(value = "composited")
-    private Integer composited;
+    private Boolean composited;
 
     /**
      * 运输方式

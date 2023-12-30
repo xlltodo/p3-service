@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.List;
+
 @FeignClient(name = "p3-wms")
 public interface ForecastExpressClient {
 
@@ -16,5 +18,5 @@ public interface ForecastExpressClient {
     ForecastExpressApiResult<ForecastExpressDTO> getExpressBill(@RequestParam(value = "expressNumber") String expressNumber);
 
     @PutMapping("/web/forecast/express/batch/receive")
-    ForecastExpressApiResult<String> expressReceipt(@RequestBody ForecastExpressReceiptDTO forecastExpressReceiptDTO);
+    ForecastExpressApiResult<String> expressReceipt(@RequestBody List<ForecastExpressReceiptDTO> forecastExpressReceipts);
 }

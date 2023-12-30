@@ -11,14 +11,14 @@ import java.time.LocalDateTime;
 
 /**
  * 包裹空间属性表
- * @TableName package_spatial_attributes
+ * @TableName package_spatial_attribute
  */
 @Data
-@TableName(value ="package_spatial_attributes")
-public class PackageSpatialAttributesEntity implements Serializable {
+@TableName(value ="package_spatial_attribute")
+public class PackageSpatialAttributeEntity implements Serializable {
 
     @Serial
-    private static final long serialVersionUID = 6166020289849186415L;
+    private static final long serialVersionUID = -3541668850777274924L;
 
     /**
      * 主键ID

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.p3.service.packages.infrastructure.repository.mapper.PackageSpatialAttributeMapper">
+
+    <resultMap id="BaseResultMap" type="com.p3.service.packages.infrastructure.repository.entity.PackageSpatialAttributeEntity">
+            <id property="id" column="id" jdbcType="VARCHAR"/>
+            <result property="packageCode" column="package_code" jdbcType="VARCHAR"/>
+            <result property="length" column="length" jdbcType="DOUBLE"/>
+            <result property="width" column="width" jdbcType="DOUBLE"/>
+            <result property="height" column="height" jdbcType="DOUBLE"/>
+            <result property="volume" column="volume" jdbcType="DOUBLE"/>
+            <result property="weight" column="weight" jdbcType="DOUBLE"/>
+            <result property="measurementTime" column="measurement_time" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,package_code,length,
+        width,height,volume,
+        weight,measurement_time
+    </sql>
+</mapper>

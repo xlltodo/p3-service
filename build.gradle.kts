@@ -54,6 +54,8 @@ subprojects {
                 dependency("com.mysql:mysql-connector-j:${project.findProperty("mysqlConnectorVersion")}")
                 dependency("io.swagger.core.v3:swagger-annotations:${project.findProperty("swaggerVersion")}")
                 dependency("com.github.xiaoymin:knife4j-openapi3-jakarta-spring-boot-starter:${project.findProperty("knife4jVersion")}")
+                dependency("com.fasterxml.jackson.core:jackson-annotations:${project.findProperty("jacksonAnnotationsVersion")}")
+                dependency("org.redisson:redisson-spring-boot-starter:${project.findProperty("redissonVersion")}")
             }
         }
     }
@@ -84,6 +86,8 @@ subprojects {
                 dependency("com.mysql:mysql-connector-j:${project.findProperty("mysqlConnectorVersion")}")
                 dependency("io.swagger.core.v3:swagger-annotations:${project.findProperty("swaggerVersion")}")
                 dependency("com.github.xiaoymin:knife4j-openapi3-jakarta-spring-boot-starter:${project.findProperty("knife4jVersion")}")
+                dependency("com.fasterxml.jackson.core:jackson-annotations:${project.findProperty("jacksonAnnotationsVersion")}")
+                dependency("org.redisson:redisson-spring-boot-starter:${project.findProperty("redissonVersion")}")
             }
         }
     }

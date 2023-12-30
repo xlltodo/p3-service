@@ -1,14 +1,9 @@
 package com.p3.service.packages.domain.model.entity;
 
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableField;
-import com.baomidou.mybatisplus.annotation.TableId;
-import com.baomidou.mybatisplus.annotation.TableName;
-import java.io.Serializable;
-import java.math.BigDecimal;
-
 import com.p3.service.packages.domain.model.mapper.PackageMainInfoMapper;
-import lombok.Data;
+
+import java.math.BigDecimal;
+import java.util.List;
 
 public class PackageMainInfo {
 
@@ -21,6 +16,16 @@ public class PackageMainInfo {
      * 包裹编号
      */
     private String packageCode;
+
+    /**
+     * 包裹单号
+     */
+    private List<PackageTrackingNumber> trackingNumbers;
+
+    /**
+     * 包裹空间属性
+     */
+    private List<PackageSpatialAttribute> attributes;
 
     /**
      * 所属客户编号
@@ -70,16 +75,18 @@ public class PackageMainInfo {
     /**
      * 集包标识
      */
-    private Integer composited;
+    private Boolean composited;
 
     /**
      * 运输方式
      */
     private String shippingMethod;
 
-    public PackageMainInfo(String id, String packageCode, String customerCode, String customerRank, String customerName, String thirdPartyCode, String shippingWarehouse, String destinationCountry, String primaryGoodsType, String secondaryGoodsType, BigDecimal goodsValue, Integer composited, String shippingMethod) {
+    public PackageMainInfo(String id, String packageCode, List<PackageTrackingNumber> trackingNumbers, List<PackageSpatialAttribute> attributes, String customerCode, String customerRank, String customerName, String thirdPartyCode, String shippingWarehouse, String destinationCountry, String primaryGoodsType, String secondaryGoodsType, BigDecimal goodsValue, Boolean composited, String shippingMethod) {
         this.id = id;
         this.packageCode = packageCode;
+        this.trackingNumbers = trackingNumbers;
+        this.attributes = attributes;
         this.customerCode = customerCode;
         this.customerRank = customerRank;
         this.customerName = customerName;
@@ -94,9 +101,11 @@ public class PackageMainInfo {
     }
 
     public <T> T mapWith(PackageMainInfoMapper<T> mapper) {
-        return mapper.map(this.id, this.packageCode, this.customerCode, this.customerRank,
-                this.customerName, this.thirdPartyCode, this.shippingWarehouse,
-                this.destinationCountry, this.primaryGoodsType, this.secondaryGoodsType,
-                this.goodsValue, this.composited, this.shippingMethod);
+        return mapper.map(this.id, this.packageCode, this.trackingNumbers, this.attributes,
+                this.customerCode, this.customerRank, this.customerName,
+                this.thirdPartyCode, this.shippingWarehouse, this.destinationCountry,
+                this.primaryGoodsType, this.secondaryGoodsType, this.goodsValue,
+                this.composited, this.shippingMethod);
     }
+
 }

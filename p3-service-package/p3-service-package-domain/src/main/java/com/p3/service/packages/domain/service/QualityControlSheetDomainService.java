@@ -29,11 +29,6 @@ public class QualityControlSheetDomainService {
         return packageQualityControlSheetRepository.update(qualityControlSheet);
     }
 
-    public Boolean submit(QualityControlSheet qualityControlSheet) {
-        this.publishPackageDeliveryEvent(qualityControlSheet);
-        return packageQualityControlSheetRepository.update(qualityControlSheet);
-    }
-
     public Boolean createOrUpdate(QualityControlSheet qualityControlSheet) {
 
         if(packageQualityControlSheetRepository.checkExist(qualityControlSheet.getUniqueIdentifier())) {
@@ -41,6 +36,11 @@ public class QualityControlSheetDomainService {
         }else {
             return this.create(qualityControlSheet);
         }
+    }
+
+    public Boolean submit(QualityControlSheet qualityControlSheet) {
+        this.publishPackageDeliveryEvent(qualityControlSheet);
+        return this.createOrUpdate(qualityControlSheet);
     }
 
     public void publishPackageDeliveryEvent(QualityControlSheet qualityControlSheet) {

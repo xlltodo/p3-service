@@ -7,11 +7,13 @@ import com.p3.service.packages.infrastructure.repository.convertor.PackageQualit
 import com.p3.service.packages.infrastructure.repository.entity.PackageQualityControlSheetEntity;
 import com.p3.service.packages.infrastructure.repository.mapper.PackageQualityControlSheetMapper;
 import jakarta.annotation.Resource;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
 
+@Slf4j
 @Repository
 public class QualityControlSheetRepositoryImpl implements IQualityControlSheetRepository {
 
