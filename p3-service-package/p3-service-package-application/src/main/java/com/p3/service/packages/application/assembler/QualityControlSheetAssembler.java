@@ -6,6 +6,8 @@ import com.p3.service.packages.domain.model.entity.QualityControlSheet;
 import com.p3.service.packages.domain.model.factory.QualityControlSheetFactory;
 import com.p3.service.packages.infrastructure.client.dto.ForecastExpressDTO;
 
+import java.util.Optional;
+
 public class QualityControlSheetAssembler {
 
 
@@ -16,7 +18,7 @@ public class QualityControlSheetAssembler {
                 QualityControlSheetPackageAssembler.toEntities(command.getPackages()),
                 command.getCustomerCode(),
                 command.getStorageLocation(),
-                command.getExpectedPackageCount(),
+                null,
                 command.getActualPackageCount(),
                 command.getExpectedProductCount(),
                 command.getActualProductCount(),
@@ -44,7 +46,7 @@ public class QualityControlSheetAssembler {
                                              inspectorId, inspectorName, inspectionTime, originalProductRemarks) -> new QualityControlSheetResult()
                 .setId(id)
                 .setExpressBillNumber(expressBillNumber)
-                .setPackages(QualityControlSheetPackageAssembler.toResults(packages))
+                .setPackages(Optional.ofNullable(packages).map(QualityControlSheetPackageAssembler::toResults).orElse(null))
                 .setCustomerCode(customerCode)
                 .setStorageLocation(storageLocation)
                 .setExpectedPackageCount(expectedPackageCount)

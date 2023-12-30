@@ -7,13 +7,12 @@ import com.p3.service.packages.application.result.QualityControlSheetResult;
 import com.p3.service.packages.domain.model.entity.QualityControlSheet;
 import com.p3.service.packages.domain.service.QualityControlSheetDomainService;
 import com.p3.service.packages.infrastructure.client.ForecastExpressClient;
-import com.p3.service.packages.infrastructure.client.dto.ForecastExpressApiResult;
-import com.p3.service.packages.infrastructure.client.dto.ForecastExpressDTO;
 import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDateTime;
 import java.util.Optional;
 
 @Slf4j
@@ -29,14 +28,13 @@ public class QualityControlSheetCommandHandler {
     public QualityControlSheetResult info(PackageQualityControlSheetQuery query) {
         Optional<QualityControlSheet> packageQualityControlSheetOptional = Optional.ofNullable(qualityControlSheetDomainService.getBuyExpressBillNumber(query.getExpressBillNumber()));
 
-        ForecastExpressApiResult<ForecastExpressDTO> forecastExpressApiResult = forecastExpressClient.getExpressBill(query.getExpressBillNumber());
-        log.info("获取预报单:{}", forecastExpressApiResult);
         return packageQualityControlSheetOptional.map(QualityControlSheetAssembler::toResult)
                 .orElse(Optional.ofNullable(forecastExpressClient.getExpressBill(query.getExpressBillNumber()).getData()).map(QualityControlSheetAssembler::toResult).orElse(null));
     }
 
     public Boolean save(QualityControlSheetCommand command) {
 
+        command.setInspectionTime(LocalDateTime.now());
         return qualityControlSheetDomainService.createOrUpdate(QualityControlSheetAssembler.toEntity(command));
     }
 

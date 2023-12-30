@@ -28,6 +28,10 @@ public class QualityControlSheetCommand implements Serializable {
     @Schema(description = "质检单包裹信息")
     private List<QualityControlSheetPackageCommand> packages;
 
+    @NotEmpty(message = "质检单服务信息不能为空")
+    @Schema(description = "质检单服务信息")
+    private List<QualityControlSheetServiceCommand> services;
+
     @NotBlank(message = "客户编号不能为空")
     @Schema(description = "客户编号")
     private String customerCode;
@@ -35,11 +39,6 @@ public class QualityControlSheetCommand implements Serializable {
     @NotBlank(message = "存放库位不能为空")
     @Schema(description = "存放库位")
     private String storageLocation;
-
-    @NotNull(message = "应收包裹件数不能为空")
-    @Min(value = 0, message = "应收包裹件数不能小于0")
-    @Schema(description = "应收包裹件数")
-    private Integer expectedPackageCount;
 
     @NotNull(message = "实收包裹件数不能为空")
     @Min(value = 0, message = "实收包裹件数不能小于0")
@@ -57,7 +56,7 @@ public class QualityControlSheetCommand implements Serializable {
     private Integer actualProductCount;
 
     @NotNull(message = "商品总价值不能为空")
-    @DecimalMin(value = "0.0", inclusive = true, message = "商品总价值不能为负数")
+    @DecimalMin(value = "0.0", message = "商品总价值不能为负数")
     @Schema(description = "商品总价值")
     private BigDecimal totalProductValue;
 
@@ -97,7 +96,7 @@ public class QualityControlSheetCommand implements Serializable {
     @Schema(description = "质检员名称")
     private String inspectorName;
 
-    @NotNull(message = "质检时间不能为空")
+//    @NotNull(message = "质检时间不能为空")
     @Schema(description = "质检时间")
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime inspectionTime;

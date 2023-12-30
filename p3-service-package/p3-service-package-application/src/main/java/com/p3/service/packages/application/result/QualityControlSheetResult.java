@@ -1,5 +1,6 @@
 package com.p3.service.packages.application.result;
 
+import com.p3.service.packages.application.command.QualityControlSheetServiceCommand;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.experimental.Accessors;
@@ -26,8 +27,26 @@ public class QualityControlSheetResult implements Serializable {
     @Schema(description = "质检单包裹信息")
     private List<QualityControlSheetPackageResult> packages;
 
-    @Schema(description = "客户编号")
+    @Schema(description = "质检单服务信息")
+    private List<QualityControlSheetServiceCommand> services;
+
+    @Schema(description = "客户代号")
     private String customerCode;
+
+    @Schema(description = "客户昵称")
+    private String customerNickname;
+
+    @Schema(description = "客户等级")
+    private String customerLevel;
+
+    @Schema(description = "客户类型")
+    private String customerType;
+
+    @Schema(description = "第三方客户代号")
+    private String thirdPartyCustomerCode;
+
+    @Schema(description = "第三方客户等级")
+    private String thirdPartyCustomerLevel;
 
     @Schema(description = "存放库位")
     private String storageLocation;
@@ -65,7 +84,16 @@ public class QualityControlSheetResult implements Serializable {
     @Schema(description = "快递公司名称")
     private String expressCompanyName;
 
-    @Schema(description = "包裹状态")
+    @Schema(description = "异常件标识（0否1是）")
+    private Boolean exceptional;
+
+    @Schema(description = "商品列表")
+    List<QualityControlSheetGoodsInfoResult> goods;
+
+    @Schema(description = "原始商品备注")
+    private String originalProductRemarks;
+
+    @Schema(description = "包裹状态（预留字段）")
     private String packageStatus;
 
     @Schema(description = "质检员ID")
@@ -76,10 +104,4 @@ public class QualityControlSheetResult implements Serializable {
 
     @Schema(description = "质检时间")
     private LocalDateTime inspectionTime;
-
-    @Schema(description = "原始商品备注")
-    private String originalProductRemarks;
-
-    @Schema(description = "商品列表")
-    List<QualityControlSheetGoodsInfoResult> goods;
 }
