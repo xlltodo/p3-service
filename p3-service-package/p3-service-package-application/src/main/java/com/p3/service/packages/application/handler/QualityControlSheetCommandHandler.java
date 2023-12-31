@@ -6,13 +6,17 @@ import com.p3.service.packages.application.query.PackageQualityControlSheetQuery
 import com.p3.service.packages.application.result.QualityControlSheetResult;
 import com.p3.service.packages.domain.model.entity.QualityControlSheet;
 import com.p3.service.packages.domain.service.QualityControlSheetDomainService;
-import com.p3.service.packages.infrastructure.client.ForecastExpressClient;
+import com.p3.service.packages.infrastructure.client.P3WmsClient;
+import com.p3.service.packages.infrastructure.client.dto.CustomerInfoDTO;
+import com.p3.service.packages.infrastructure.client.dto.ForecastExpressDTO;
+import com.p3.service.packages.infrastructure.client.dto.P3ApiResult;
 import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.ObjectUtils;
 
-import java.time.LocalDateTime;
 import java.util.Optional;
 
 @Slf4j
@@ -23,23 +27,35 @@ public class QualityControlSheetCommandHandler {
     private QualityControlSheetDomainService qualityControlSheetDomainService;
     @Lazy
     @Resource
-    private ForecastExpressClient forecastExpressClient;
+    private P3WmsClient p3WmsClient;
 
     public QualityControlSheetResult info(PackageQualityControlSheetQuery query) {
         Optional<QualityControlSheet> packageQualityControlSheetOptional = Optional.ofNullable(qualityControlSheetDomainService.getBuyExpressBillNumber(query.getExpressBillNumber()));
 
         return packageQualityControlSheetOptional.map(QualityControlSheetAssembler::toResult)
-                .orElse(Optional.ofNullable(forecastExpressClient.getExpressBill(query.getExpressBillNumber()).getData()).map(QualityControlSheetAssembler::toResult).orElse(null));
+                .orElse(Optional.ofNullable(p3WmsClient.getExpressBill(query.getExpressBillNumber()).getData()).map(QualityControlSheetAssembler::toResult).orElse(null));
     }
 
-    public Boolean save(QualityControlSheetCommand command) {
+    @Transactional(rollbackFor = Exception.class)
+    public QualityControlSheet save(QualityControlSheetCommand command) {
 
-        command.setInspectionTime(LocalDateTime.now());
-        return qualityControlSheetDomainService.createOrUpdate(QualityControlSheetAssembler.toEntity(command));
+        ForecastExpressDTO forecastExpress = Optional.ofNullable(p3WmsClient.getExpressBill(command.getExpressBillNumber())).map(P3ApiResult::getData).orElse(null);
+        if(ObjectUtils.isEmpty(forecastExpress)) {
+            return null;
+        }
+        CustomerInfoDTO customerInfo = Optional.ofNullable(p3WmsClient.getCustomerInfo(forecastExpress.getCustomerCode(), forecastExpress.getThirdPartyCustomerCode())).map(P3ApiResult::getData).orElse(null);
+        if(ObjectUtils.isEmpty(customerInfo)) {
+            return null;
+        }
+        QualityControlSheet qualityControlSheet = QualityControlSheetAssembler.toEntity(command, forecastExpress, customerInfo);
+        return qualityControlSheetDomainService.createOrUpdate(qualityControlSheet) ? qualityControlSheet : null;
     }
 
+    @Transactional(rollbackFor = Exception.class)
     public Boolean submit(QualityControlSheetCommand command) {
-        this.save(command);
-        return qualityControlSheetDomainService.submit(QualityControlSheetAssembler.toEntity(command));
+
+        QualityControlSheet qualityControlSheet = this.save(command);
+        qualityControlSheet.submitQualityControlSheet("", "");
+        return qualityControlSheetDomainService.submit(qualityControlSheet);
     }
 }

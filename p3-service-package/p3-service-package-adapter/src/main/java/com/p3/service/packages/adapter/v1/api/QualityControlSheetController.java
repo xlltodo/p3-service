@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 
 @Slf4j
 @Tag(name = "QC入库")
@@ -49,7 +50,7 @@ public class QualityControlSheetController {
             return ApiResponse.fail("参数校验失败！");
         }
 
-        return ApiResponse.success(qualityControlSheetCommandHandler.save(command));
+        return ApiResponse.success(Optional.ofNullable(qualityControlSheetCommandHandler.save(command)).isPresent());
     }
 
     @Operation(summary = "保存并提交")

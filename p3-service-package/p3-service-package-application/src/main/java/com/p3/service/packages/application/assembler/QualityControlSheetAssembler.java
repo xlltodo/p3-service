@@ -4,23 +4,25 @@ import com.p3.service.packages.application.command.QualityControlSheetCommand;
 import com.p3.service.packages.application.result.QualityControlSheetResult;
 import com.p3.service.packages.domain.model.entity.QualityControlSheet;
 import com.p3.service.packages.domain.model.factory.QualityControlSheetFactory;
+import com.p3.service.packages.infrastructure.client.dto.CustomerInfoDTO;
 import com.p3.service.packages.infrastructure.client.dto.ForecastExpressDTO;
 
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 public class QualityControlSheetAssembler {
 
 
-    public static QualityControlSheet toEntity(QualityControlSheetCommand command) {
+    public static QualityControlSheet toEntity(QualityControlSheetCommand command, ForecastExpressDTO forecastExpress, CustomerInfoDTO customerInfo) {
         return QualityControlSheetFactory.create(
                 command.getId(),
                 command.getExpressBillNumber(),
                 QualityControlSheetPackageAssembler.toEntities(command.getPackages()),
                 command.getCustomerCode(),
                 command.getStorageLocation(),
-                null,
+                forecastExpress.getNumberOfPackages(),
                 command.getActualPackageCount(),
-                command.getExpectedProductCount(),
+                forecastExpress.getCommodityLists().stream().mapToInt(ForecastExpressDTO.Commodity::getQuantityShipped).sum(),
                 command.getActualProductCount(),
                 command.getTotalProductValue(),
                 command.getWarehouseCode(),
@@ -29,11 +31,11 @@ public class QualityControlSheetAssembler {
                 command.getDestinationRegionName(),
                 command.getExpressCompanyCode(),
                 command.getExpressCompanyName(),
-                command.getPackageStatus(),
-                command.getInspectorId(),
-                command.getInspectorName(),
-                command.getInspectionTime(),
-                command.getOriginalProductRemarks()
+                null,
+                null,
+                null,
+                null,
+                forecastExpress.getRemark()
         );
     }
 

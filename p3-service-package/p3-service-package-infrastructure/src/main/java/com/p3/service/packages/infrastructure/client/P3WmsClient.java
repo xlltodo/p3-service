@@ -1,8 +1,9 @@
 package com.p3.service.packages.infrastructure.client;
 
-import com.p3.service.packages.infrastructure.client.dto.ForecastExpressApiResult;
+import com.p3.service.packages.infrastructure.client.dto.CustomerInfoDTO;
 import com.p3.service.packages.infrastructure.client.dto.ForecastExpressDTO;
 import com.p3.service.packages.infrastructure.client.dto.ForecastExpressReceiptDTO;
+import com.p3.service.packages.infrastructure.client.dto.P3ApiResult;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -12,11 +13,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 import java.util.List;
 
 @FeignClient(name = "p3-wms")
-public interface ForecastExpressClient {
+public interface P3WmsClient {
 
     @GetMapping("/web/forecast/express/get")
-    ForecastExpressApiResult<ForecastExpressDTO> getExpressBill(@RequestParam(value = "expressNumber") String expressNumber);
+    P3ApiResult<ForecastExpressDTO> getExpressBill(@RequestParam(value = "expressNumber") String expressNumber);
 
     @PutMapping("/web/forecast/express/batch/receive")
-    ForecastExpressApiResult<String> expressReceipt(@RequestBody List<ForecastExpressReceiptDTO> forecastExpressReceipts);
+    P3ApiResult<String> expressReceipt(@RequestBody List<ForecastExpressReceiptDTO> forecastExpressReceipts);
+
+    @GetMapping("/internal/customer/get")
+    P3ApiResult<CustomerInfoDTO> getCustomerInfo(@RequestParam(value = "customerCode") String customerCode, @RequestParam(value = "thirdPartyCustomerCode") String thirdPartyCustomerCode);
 }

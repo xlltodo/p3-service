@@ -4,7 +4,7 @@ package com.p3.service.packages.infrastructure.client.dto;
 import lombok.Data;
 
 @Data
-public class ForecastExpressApiResult<T> {
+public class P3ApiResult<T> {
 
     private Integer code;
 

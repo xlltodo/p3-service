@@ -185,4 +185,11 @@ public class QualityControlSheet {
                 .setOriginalProductRemarks(this.originalProductRemarks);
     }
 
+    public void submitQualityControlSheet(String inspectorId, String inspectorName) {
+
+        this.inspectorId = inspectorId;
+        this.inspectorName = inspectorName;
+        this.inspectionTime = LocalDateTime.now();
+    }
+
 }

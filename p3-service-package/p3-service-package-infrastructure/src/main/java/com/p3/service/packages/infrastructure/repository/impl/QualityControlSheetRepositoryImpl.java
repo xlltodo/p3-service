@@ -51,7 +51,7 @@ public class QualityControlSheetRepositoryImpl implements IQualityControlSheetRe
 
         PackageQualityControlSheetEntity packageQualityControlSheetEntity = PackageQualityControlSheetEntityConvertor.convertToDataEntity(qualityControlSheet);
         if (this.checkExist(packageQualityControlSheetEntity.getExpressBillNumber())) {
-            return false;
+            packageQualityControlSheetMapper.delete(Wrappers.lambdaQuery(PackageQualityControlSheetEntity.class).eq(PackageQualityControlSheetEntity::getExpressBillNumber, packageQualityControlSheetEntity.getExpressBillNumber()));
         }
         return packageQualityControlSheetMapper.insert(packageQualityControlSheetEntity) > 0;
     }

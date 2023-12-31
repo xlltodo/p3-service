@@ -3,11 +3,16 @@ package com.p3.service.packages.infrastructure.client.dto;
 import lombok.Data;
 import lombok.experimental.Accessors;
 
+import java.io.Serial;
+import java.io.Serializable;
 import java.util.List;
 
 @Data
 @Accessors(chain = true)
-public class ForecastExpressReceiptDTO {
+public class ForecastExpressReceiptDTO implements Serializable {
+
+    @Serial
+    private static final long serialVersionUID = -2633369820043678833L;
 
     private String requestId;
     private Integer id;

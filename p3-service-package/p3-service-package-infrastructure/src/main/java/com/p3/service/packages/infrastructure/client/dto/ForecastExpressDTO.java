@@ -2,10 +2,15 @@ package com.p3.service.packages.infrastructure.client.dto;
 
 import lombok.Data;
 
+import java.io.Serial;
+import java.io.Serializable;
 import java.util.List;
 
 @Data
-public class ForecastExpressDTO {
+public class ForecastExpressDTO implements Serializable {
+
+    @Serial
+    private static final long serialVersionUID = 5225367308933373972L;
 
     private String id;
     private String customerCode;
@@ -37,7 +42,11 @@ public class ForecastExpressDTO {
     private List<Commodity> commodityLists;
 
     @Data
-    public static class Commodity {
+    public static class Commodity implements Serializable {
+
+        @Serial
+        private static final long serialVersionUID = 2533465747598864777L;
+
         private String id;
         private String goodsName;
         private String goodsSpecification;

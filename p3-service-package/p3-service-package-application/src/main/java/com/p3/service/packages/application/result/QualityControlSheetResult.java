@@ -48,7 +48,7 @@ public class QualityControlSheetResult implements Serializable {
     @Schema(description = "第三方客户等级")
     private String thirdPartyCustomerLevel;
 
-    @Schema(description = "存放库位")
+    @Schema(description = "存放库位（QC没有推荐库位）")
     private String storageLocation;
 
     @Schema(description = "应收包裹件数")
@@ -87,6 +87,9 @@ public class QualityControlSheetResult implements Serializable {
     @Schema(description = "异常件标识（0否1是）")
     private Boolean exceptional;
 
+    @Schema(description = "物品图片")
+    private String itemImage;
+
     @Schema(description = "商品列表")
     List<QualityControlSheetGoodsInfoResult> goods;
 
@@ -104,4 +107,5 @@ public class QualityControlSheetResult implements Serializable {
 
     @Schema(description = "质检时间")
     private LocalDateTime inspectionTime;
+
 }
