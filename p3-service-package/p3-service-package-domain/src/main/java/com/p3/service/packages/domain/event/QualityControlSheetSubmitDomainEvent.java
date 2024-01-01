@@ -30,6 +30,11 @@ public class QualityControlSheetSubmitDomainEvent extends SyncInProcessBaseDomai
     private List<Package> packages;
 
     /**
+     * 质检单服务信息
+     */
+    private List<Service> services;
+
+    /**
      * 客户编号
      */
     private String customerCode;
@@ -205,5 +210,34 @@ public class QualityControlSheetSubmitDomainEvent extends SyncInProcessBaseDomai
          * 二级货品类型
          */
         private String secondaryGoodsType;
+    }
+
+    @Getter
+    @Setter
+    @Accessors(chain = true)
+    public static class Service implements Serializable {
+
+        @Serial
+        private static final long serialVersionUID = -1608343334976418775L;
+
+        /**
+         * 服务类型
+         */
+        private String serviceType;
+
+        /**
+         * 服务名称
+         */
+        private String serviceName;
+
+        /**
+         * 服务费
+         */
+        private BigDecimal fee;
+
+        /**
+         * 已开通标识（0否1是）
+         */
+        private Integer activated;
     }
 }

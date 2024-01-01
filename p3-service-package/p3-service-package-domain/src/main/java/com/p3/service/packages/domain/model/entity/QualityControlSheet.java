@@ -1,6 +1,5 @@
 package com.p3.service.packages.domain.model.entity;
 
-import com.p3.service.packages.domain.event.ExpressPackageReceiptDomainEvent;
 import com.p3.service.packages.domain.event.QualityControlSheetSubmitDomainEvent;
 import com.p3.service.packages.domain.model.mapper.PackageQualityControlSheetMapper;
 
@@ -25,6 +24,11 @@ public class QualityControlSheet {
      * 质检单包裹信息
      */
     private List<QualityControlSheetPackage> packages;
+
+    /**
+     * 质检单服务信息
+     */
+    private List<QualityControlSheetServiceItem> services;
 
     /**
      * 客户编号
@@ -117,6 +121,7 @@ public class QualityControlSheet {
     private String originalProductRemarks;
 
     public QualityControlSheet(String id, String expressBillNumber, List<QualityControlSheetPackage> packages,
+                               List<QualityControlSheetServiceItem> services,
                                String customerCode, String storageLocation, Integer expectedPackageCount,
                                Integer actualPackageCount, Integer expectedProductCount,
                                Integer actualProductCount, BigDecimal totalProductValue,
@@ -127,6 +132,7 @@ public class QualityControlSheet {
         this.id = id;
         this.expressBillNumber = expressBillNumber;
         this.packages = packages;
+        this.services = services;
         this.customerCode = customerCode;
         this.storageLocation = storageLocation;
         this.expectedPackageCount = expectedPackageCount;
@@ -148,7 +154,7 @@ public class QualityControlSheet {
     }
 
     public <T> T mapWith(PackageQualityControlSheetMapper<T> mapper) {
-        return mapper.map(this.id, this.expressBillNumber, this.packages, this.customerCode, this.storageLocation,
+        return mapper.map(this.id, this.expressBillNumber, this.packages, this.services, this.customerCode, this.storageLocation,
                 this.expectedPackageCount, this.actualPackageCount, this.expectedProductCount,
                 this.actualProductCount, this.totalProductValue, this.warehouseCode,
                 this.warehouseName, this.destinationRegionCode, this.destinationRegionName,
@@ -165,6 +171,7 @@ public class QualityControlSheet {
         return new QualityControlSheetSubmitDomainEvent()
                 .setExpressBillNumber(this.expressBillNumber)
                 .setPackages(this.packages.stream().map(QualityControlSheetPackage::submit).collect(Collectors.toList()))
+                .setServices(this.services.stream().map(QualityControlSheetServiceItem::submit).collect(Collectors.toList()))
                 .setCustomerCode(this.customerCode)
                 .setStorageLocation(this.storageLocation)
                 .setExpectedPackageCount(this.expectedPackageCount)

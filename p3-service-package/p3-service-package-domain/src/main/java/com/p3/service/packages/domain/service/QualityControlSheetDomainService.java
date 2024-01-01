@@ -13,6 +13,9 @@ public class QualityControlSheetDomainService {
     private IQualityControlSheetRepository packageQualityControlSheetRepository;
 
     @Resource
+    private IQualityControlSheetRepository packageQualityControlSheetARepository;
+
+    @Resource
     private ISyncInProcessEventPublisher syncInProcessEventPublisher;
 
 
@@ -26,6 +29,7 @@ public class QualityControlSheetDomainService {
     }
 
     public Boolean update(QualityControlSheet qualityControlSheet) {
+
         return packageQualityControlSheetRepository.update(qualityControlSheet);
     }
 
