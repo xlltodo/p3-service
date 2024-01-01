@@ -4,7 +4,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.p3.service.packages.infrastructure.repository.mapper.PackageProcessedRecordMapper">
 
-    <resultMap id="BaseResultMap" type="com.p3.service.packages.infrastructure.repository.entity.PackageProcessedRecordEntity">
+    <resultMap id="BaseResultMap" type="com.p3.service.packages.infrastructure.repository.entity.PackageProcessedRecord">
             <id property="id" column="id" jdbcType="INTEGER"/>
             <result property="ticketsNum" column="tickets_num" jdbcType="VARCHAR"/>
             <result property="weight" column="weight" jdbcType="DOUBLE"/>

@@ -9,15 +9,15 @@ import java.time.LocalDateTime;
 import lombok.Data;
 
 /**
- * 包裹追踪编号表
- * @TableName package_tracking_number
+ * 集包追踪编号表
+ * @TableName composite_package_tracking_number
  */
-@TableName(value ="package_tracking_number")
+@TableName(value ="composite_package_tracking_number")
 @Data
-public class PackageTrackingNumberEntity implements Serializable {
+public class CompositePackageTrackingNumberEntity implements Serializable {
 
     @Serial
-    private static final long serialVersionUID = -4082249161289801828L;
+    private static final long serialVersionUID = 5446101917980708102L;
 
     /**
      * 主键ID
@@ -26,10 +26,10 @@ public class PackageTrackingNumberEntity implements Serializable {
     private String id;
 
     /**
-     * 包裹编号
+     * 集包编号
      */
-    @TableField(value = "package_code")
-    private String packageCode;
+    @TableField(value = "composite_package_code")
+    private String compositePackageCode;
 
     /**
      * 单号类型

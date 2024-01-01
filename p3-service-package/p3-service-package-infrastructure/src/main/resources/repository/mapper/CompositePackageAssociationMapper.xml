@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.p3.service.packages.infrastructure.repository.mapper.CompositePackageAssociationMapper">
+
+    <resultMap id="BaseResultMap" type="com.p3.service.packages.infrastructure.repository.entity.CompositePackageAssociationEntity">
+            <id property="id" column="id" jdbcType="INTEGER"/>
+            <result property="compositePackageCode" column="composite_package_code" jdbcType="VARCHAR"/>
+            <result property="packageCode" column="package_code" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,composite_package_code,package_code
+    </sql>
+</mapper>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.p3.service.packages.infrastructure.repository.mapper.QualityControlSheetPackageMapper">
+
+    <resultMap id="BaseResultMap" type="com.p3.service.packages.infrastructure.repository.entity.QualityControlSheetPackage">
+            <id property="id" column="id" jdbcType="VARCHAR"/>
+            <result property="sheetId" column="sheet_id" jdbcType="VARCHAR"/>
+            <result property="weight" column="weight" jdbcType="DOUBLE"/>
+            <result property="length" column="length" jdbcType="DOUBLE"/>
+            <result property="width" column="width" jdbcType="DOUBLE"/>
+            <result property="height" column="height" jdbcType="DOUBLE"/>
+            <result property="volume" column="volume" jdbcType="DOUBLE"/>
+            <result property="quantity" column="quantity" jdbcType="INTEGER"/>
+            <result property="productName" column="product_name" jdbcType="VARCHAR"/>
+            <result property="brandName" column="brand_name" jdbcType="VARCHAR"/>
+            <result property="primaryGoodsType" column="primary_goods_type" jdbcType="VARCHAR"/>
+            <result property="secondaryGoodsType" column="secondary_goods_type" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,sheet_id,weight,
+        length,width,height,
+        volume,quantity,product_name,
+        brand_name,primary_goods_type,secondary_goods_type
+    </sql>
+</mapper>

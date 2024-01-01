@@ -1,7 +1,6 @@
 package com.p3.service.packages.infrastructure.repository.convertor;
 
 import com.p3.service.packages.domain.model.entity.PackageMainInfo;
-import com.p3.service.packages.infrastructure.repository.entity.PackageMainInfoEntity;
 
 public class PackageMainInfoEntityConvertor {
 

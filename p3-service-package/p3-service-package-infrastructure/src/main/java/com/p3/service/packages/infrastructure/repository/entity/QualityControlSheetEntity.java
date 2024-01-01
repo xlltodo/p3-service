@@ -1,33 +1,30 @@
 package com.p3.service.packages.infrastructure.repository.entity;
 
-import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
-import lombok.Data;
-import lombok.experimental.Accessors;
 
 import java.io.Serial;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import lombok.Data;
 
 /**
- * 包裹质检单
- * @TableName package_quality_control_sheet
+ * 质检单
+ * @TableName quality_control_sheet
  */
+@TableName(value ="quality_control_sheet")
 @Data
-@Accessors(chain = true)
-@TableName(value ="package_quality_control_sheet")
-public class PackageQualityControlSheetEntity implements Serializable {
+public class QualityControlSheetEntity implements Serializable {
 
     @Serial
-    private static final long serialVersionUID = -7703832334368576751L;
+    private static final long serialVersionUID = -1270332545863381934L;
 
     /**
      * 主键ID
      */
-    @TableId(value = "id", type = IdType.ASSIGN_ID)
+    @TableId(value = "id")
     private String id;
 
     /**
@@ -37,10 +34,40 @@ public class PackageQualityControlSheetEntity implements Serializable {
     private String expressBillNumber;
 
     /**
-     * 客户编号
+     * 客户代号
      */
     @TableField(value = "customer_code")
     private String customerCode;
+
+    /**
+     * 客户昵称
+     */
+    @TableField(value = "customer_nickname")
+    private String customerNickname;
+
+    /**
+     * 客户等级
+     */
+    @TableField(value = "customer_level")
+    private String customerLevel;
+
+    /**
+     * 客户类型
+     */
+    @TableField(value = "customer_type")
+    private String customerType;
+
+    /**
+     * 第三方客户代号
+     */
+    @TableField(value = "third_party_customer_code")
+    private String thirdPartyCustomerCode;
+
+    /**
+     * 第三方客户等级
+     */
+    @TableField(value = "third_party_customer_level")
+    private String thirdPartyCustomerLevel;
 
     /**
      * 存放库位
@@ -115,6 +142,24 @@ public class PackageQualityControlSheetEntity implements Serializable {
     private String expressCompanyName;
 
     /**
+     * 异常件标识（0否1是）
+     */
+    @TableField(value = "exceptional")
+    private Integer exceptional;
+
+    /**
+     * 物品图片
+     */
+    @TableField(value = "item_image")
+    private String itemImage;
+
+    /**
+     * 原始商品备注
+     */
+    @TableField(value = "original_product_remarks")
+    private String originalProductRemarks;
+
+    /**
      * 包裹状态
      */
     @TableField(value = "package_status")
@@ -138,9 +183,4 @@ public class PackageQualityControlSheetEntity implements Serializable {
     @TableField(value = "inspection_time")
     private LocalDateTime inspectionTime;
 
-    /**
-     * 原始商品备注
-     */
-    @TableField(value = "original_product_remarks")
-    private String originalProductRemarks;
 }

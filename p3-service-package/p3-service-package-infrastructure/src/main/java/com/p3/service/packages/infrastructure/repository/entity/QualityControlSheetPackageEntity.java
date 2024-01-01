@@ -3,23 +3,21 @@ package com.p3.service.packages.infrastructure.repository.entity;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
-import lombok.Data;
-import lombok.experimental.Accessors;
 
 import java.io.Serial;
 import java.io.Serializable;
+import lombok.Data;
 
 /**
  * 包裹质检单关联包裹表
- * @TableName package_quality_control_sheet_association
+ * @TableName quality_control_sheet_package
  */
+@TableName(value ="quality_control_sheet_package")
 @Data
-@Accessors(chain = true)
-@TableName(value ="package_quality_control_sheet_association")
-public class PackageQualityControlSheetAssociationEntity implements Serializable {
+public class QualityControlSheetPackageEntity implements Serializable {
 
     @Serial
-    private static final long serialVersionUID = 1000833897954917326L;
+    private static final long serialVersionUID = -2941410823879444390L;
 
     /**
      * 主键ID
@@ -92,4 +90,5 @@ public class PackageQualityControlSheetAssociationEntity implements Serializable
      */
     @TableField(value = "secondary_goods_type")
     private String secondaryGoodsType;
+
 }

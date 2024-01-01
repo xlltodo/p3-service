@@ -10,15 +10,15 @@ import java.time.LocalDateTime;
 import lombok.Data;
 
 /**
- * 包裹空间属性表
- * @TableName package_spatial_attribute
+ * 集包空间属性表
+ * @TableName composite_package_spatial_attribute
  */
-@TableName(value ="package_spatial_attribute")
+@TableName(value ="composite_package_spatial_attribute")
 @Data
-public class PackageSpatialAttributeEntity implements Serializable {
+public class CompositePackageSpatialAttributeEntity implements Serializable {
 
     @Serial
-    private static final long serialVersionUID = -3541668850777274924L;
+    private static final long serialVersionUID = 4081137072577285334L;
 
     /**
      * 主键ID
@@ -27,10 +27,10 @@ public class PackageSpatialAttributeEntity implements Serializable {
     private String id;
 
     /**
-     * 包裹编号
+     * 集包编号
      */
-    @TableField(value = "package_code")
-    private String packageCode;
+    @TableField(value = "composite_package_code")
+    private String compositePackageCode;
 
     /**
      * 长

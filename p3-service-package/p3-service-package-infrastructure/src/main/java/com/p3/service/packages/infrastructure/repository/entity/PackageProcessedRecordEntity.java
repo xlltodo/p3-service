@@ -4,23 +4,21 @@ import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
-import lombok.Data;
-import lombok.experimental.Accessors;
 
 import java.io.Serial;
 import java.io.Serializable;
+import lombok.Data;
 
 /**
  * 包裹过机记录
  * @TableName package_processed_record
  */
-@Data
-@Accessors(chain = true)
 @TableName(value ="package_processed_record")
+@Data
 public class PackageProcessedRecordEntity implements Serializable {
 
     @Serial
-    private static final long serialVersionUID = 8920845603111672354L;
+    private static final long serialVersionUID = 7989875070488641210L;
 
     /**
      * 主键ID
@@ -59,7 +57,7 @@ public class PackageProcessedRecordEntity implements Serializable {
     private Double height;
 
     /**
-     * 体积（立方毫米）
+     * 提及（立方毫米）
      */
     @TableField(value = "volume")
     private Double volume;

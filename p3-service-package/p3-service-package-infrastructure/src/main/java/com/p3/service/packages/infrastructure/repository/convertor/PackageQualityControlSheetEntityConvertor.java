@@ -2,7 +2,6 @@ package com.p3.service.packages.infrastructure.repository.convertor;
 
 import com.p3.service.packages.domain.model.entity.QualityControlSheet;
 import com.p3.service.packages.domain.model.factory.QualityControlSheetFactory;
-import com.p3.service.packages.infrastructure.repository.entity.PackageQualityControlSheetEntity;
 
 public class PackageQualityControlSheetEntityConvertor {
 
