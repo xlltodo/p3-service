@@ -9,6 +9,7 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import lombok.Data;
+import lombok.experimental.Accessors;
 
 /**
  * 包裹质检单服务项目
@@ -16,6 +17,7 @@ import lombok.Data;
  */
 @TableName(value ="quality_control_sheet_service_item")
 @Data
+@Accessors(chain = true)
 public class QualityControlSheetServiceItemEntity implements Serializable {
 
     @Serial
@@ -26,6 +28,12 @@ public class QualityControlSheetServiceItemEntity implements Serializable {
      */
     @TableId(value = "id")
     private String id;
+
+    /**
+     * 质检单ID
+     */
+    @TableField(value = "sheet_id")
+    private String sheetId;
 
     /**
      * 服务类型

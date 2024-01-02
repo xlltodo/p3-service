@@ -3,9 +3,12 @@ package com.p3.service.packages.infrastructure.repository.entity;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
+
+import java.io.Serial;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import lombok.Data;
+import lombok.experimental.Accessors;
 
 /**
  * 包裹质检单商品表
@@ -13,7 +16,11 @@ import lombok.Data;
  */
 @TableName(value ="quality_control_sheet_goods_info")
 @Data
+@Accessors(chain = true)
 public class QualityControlSheetGoodsInfoEntity implements Serializable {
+
+    @Serial
+    private static final long serialVersionUID = -1368451536084650225L;
 
     /**
      * 主键ID
@@ -22,10 +29,10 @@ public class QualityControlSheetGoodsInfoEntity implements Serializable {
     private String id;
 
     /**
-     * 质检单编号
+     * 质检单ID
      */
-    @TableField(value = "sheet_code")
-    private String sheetCode;
+    @TableField(value = "sheet_id")
+    private String sheetId;
 
     /**
      * 品名

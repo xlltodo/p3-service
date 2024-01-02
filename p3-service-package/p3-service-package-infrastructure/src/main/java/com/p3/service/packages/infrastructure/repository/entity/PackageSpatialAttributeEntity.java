@@ -8,6 +8,7 @@ import java.io.Serial;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import lombok.Data;
+import lombok.experimental.Accessors;
 
 /**
  * 包裹空间属性表
@@ -15,6 +16,7 @@ import lombok.Data;
  */
 @TableName(value ="package_spatial_attribute")
 @Data
+@Accessors(chain = true)
 public class PackageSpatialAttributeEntity implements Serializable {
 
     @Serial

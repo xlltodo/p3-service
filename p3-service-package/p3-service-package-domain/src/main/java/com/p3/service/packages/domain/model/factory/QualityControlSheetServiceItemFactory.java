@@ -7,7 +7,7 @@ import java.time.LocalDateTime;
 
 public class QualityControlSheetServiceItemFactory {
 
-    public static QualityControlSheetServiceItem create(String id, String serviceType, String serviceName, BigDecimal fee, Integer activated, LocalDateTime creationTime) {
-        return new QualityControlSheetServiceItem(id, serviceType, serviceName, fee, activated, creationTime);
+    public static QualityControlSheetServiceItem create(String id, String sheetId, String serviceType, String serviceName, BigDecimal fee, Integer activated, LocalDateTime creationTime) {
+        return new QualityControlSheetServiceItem(id, sheetId, serviceType, serviceName, fee, activated, creationTime);
     }
 }

@@ -5,7 +5,6 @@ import com.p3.service.packages.domain.model.mapper.PackageProcessedRecordMapper;
 
 public class PackageProcessedRecord {
 
-
     /**
      * 主键ID
      */

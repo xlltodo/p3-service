@@ -1,7 +1,7 @@
 package com.p3.service.packages.domain.model.entity;
 
 import com.p3.service.packages.domain.event.QualityControlSheetSubmitDomainEvent;
-import com.p3.service.packages.domain.model.mapper.PackageQualityControlSheetAssociationMapper;
+import com.p3.service.packages.domain.model.mapper.QualityControlSheetPackageMapper;
 
 public class QualityControlSheetPackage {
 
@@ -80,7 +80,7 @@ public class QualityControlSheetPackage {
         this.secondaryGoodsType = secondaryGoodsType;
     }
 
-    public <T> T mapWith(PackageQualityControlSheetAssociationMapper<T> mapper) {
+    public <T> T mapWith(QualityControlSheetPackageMapper<T> mapper) {
         return mapper.map(this.id, this.sheetId, this.weight, this.length,
                 this.width, this.height, this.volume, this.quantity,
                 this.productName, this.brandName, this.primaryGoodsType,

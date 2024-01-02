@@ -11,4 +11,6 @@ public interface IQualityControlSheetRepository {
     Boolean create(QualityControlSheet qualityControlSheet);
 
     Boolean update(QualityControlSheet qualityControlSheet);
+
+    Boolean delete(String expressBillNumber);
 }

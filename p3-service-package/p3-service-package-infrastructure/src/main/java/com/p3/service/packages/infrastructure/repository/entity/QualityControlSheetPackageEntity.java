@@ -7,6 +7,7 @@ import com.baomidou.mybatisplus.annotation.TableName;
 import java.io.Serial;
 import java.io.Serializable;
 import lombok.Data;
+import lombok.experimental.Accessors;
 
 /**
  * 包裹质检单关联包裹表
@@ -14,6 +15,7 @@ import lombok.Data;
  */
 @TableName(value ="quality_control_sheet_package")
 @Data
+@Accessors(chain = true)
 public class QualityControlSheetPackageEntity implements Serializable {
 
     @Serial

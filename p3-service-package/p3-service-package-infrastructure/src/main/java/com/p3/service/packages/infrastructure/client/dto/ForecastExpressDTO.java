@@ -4,6 +4,7 @@ import lombok.Data;
 
 import java.io.Serial;
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.List;
 
 @Data
@@ -24,11 +25,11 @@ public class ForecastExpressDTO implements Serializable {
     private String receiveAddress;
     private String typeOfShipping;
     private String status;
-    private double weight;
-    private double volume;
-    private int numberOfPackages;
+    private Double weight;
+    private Double volume;
+    private Integer numberOfPackages;
     private String preWarehousingNumber;
-    private int internationalShippingFeeFlag;
+    private Integer internationalShippingFeeFlag;
     private String soNumber;
     private List<String> receivedImg;
     private String reason;
@@ -57,11 +58,11 @@ public class ForecastExpressDTO implements Serializable {
         private String goodsDesc;
         private String productTypeId;
         private String productTypeName;
-        private int productTypeStandard;
-        private int productTypeCommodity;
-        private int quantityShipped;
-        private double unitPrice;
-        private double totalPrice;
+        private Integer productTypeStandard;
+        private Integer productTypeCommodity;
+        private Integer quantityShipped;
+        private BigDecimal unitPrice;
+        private BigDecimal totalPrice;
         private String remark;
         private String customerCode;
         private String customerNickname;

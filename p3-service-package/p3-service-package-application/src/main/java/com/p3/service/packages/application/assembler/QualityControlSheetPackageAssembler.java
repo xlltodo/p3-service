@@ -3,17 +3,17 @@ package com.p3.service.packages.application.assembler;
 import com.p3.service.packages.application.command.QualityControlSheetPackageCommand;
 import com.p3.service.packages.application.result.QualityControlSheetPackageResult;
 import com.p3.service.packages.domain.model.entity.QualityControlSheetPackage;
-import com.p3.service.packages.domain.model.mapper.PackageQualityControlSheetAssociationMapper;
+import com.p3.service.packages.domain.model.mapper.QualityControlSheetPackageMapper;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class QualityControlSheetPackageAssembler {
 
-    public static QualityControlSheetPackage toEntity(QualityControlSheetPackageCommand command) {
+    public static QualityControlSheetPackage toEntity(String sheetId, QualityControlSheetPackageCommand command) {
         return new QualityControlSheetPackage(
-                command.getId(),
-                command.getSheetId(),
+                null,
+                sheetId,
                 command.getWeight(),
                 command.getLength(),
                 command.getWidth(),
@@ -27,24 +27,9 @@ public class QualityControlSheetPackageAssembler {
         );
     }
 
-    public static List<QualityControlSheetPackage> toEntities(List<QualityControlSheetPackageCommand> commands) {
+    public static List<QualityControlSheetPackage> toEntities(String sheetId, List<QualityControlSheetPackageCommand> commands) {
 
-        return commands.stream().map(qualityControlSheetPackageCommand -> {
-            return new QualityControlSheetPackage(
-                    qualityControlSheetPackageCommand.getId(),
-                    qualityControlSheetPackageCommand.getSheetId(),
-                    qualityControlSheetPackageCommand.getWeight(),
-                    qualityControlSheetPackageCommand.getLength(),
-                    qualityControlSheetPackageCommand.getWidth(),
-                    qualityControlSheetPackageCommand.getHeight(),
-                    qualityControlSheetPackageCommand.getVolume(),
-                    qualityControlSheetPackageCommand.getQuantity(),
-                    qualityControlSheetPackageCommand.getProductName(),
-                    qualityControlSheetPackageCommand.getBrandName(),
-                    qualityControlSheetPackageCommand.getPrimaryGoodsType(),
-                    qualityControlSheetPackageCommand.getSecondaryGoodsType()
-            );
-        }).collect(Collectors.toList());
+        return commands.stream().map(command -> QualityControlSheetPackageAssembler.toEntity(sheetId, command)).collect(Collectors.toList());
     }
 
     public static QualityControlSheetPackageResult toResult(QualityControlSheetPackage entity) {
@@ -67,24 +52,7 @@ public class QualityControlSheetPackageAssembler {
 
     public static List<QualityControlSheetPackageResult> toResults(List<QualityControlSheetPackage> entities) {
 
-        return entities.stream().map(qualityControlSheetPackage -> {
-            PackageQualityControlSheetAssociationMapper<QualityControlSheetPackageResult> mapper = (id, sheetId, weight, length, width, height, volume, quantity, productName, brandName, primaryGoodsType, secondaryGoodsType) ->
-                    new QualityControlSheetPackageResult()
-                            .setId(id)
-                            .setSheetId(sheetId)
-                            .setWeight(weight)
-                            .setLength(length)
-                            .setWidth(width)
-                            .setHeight(height)
-                            .setVolume(volume)
-                            .setQuantity(quantity)
-                            .setProductName(productName)
-                            .setBrandName(brandName)
-                            .setPrimaryGoodsType(primaryGoodsType)
-                            .setSecondaryGoodsType(secondaryGoodsType);
-
-            return qualityControlSheetPackage.mapWith(mapper);
-        }).collect(Collectors.toList());
+        return entities.stream().map(QualityControlSheetPackageAssembler::toResult).collect(Collectors.toList());
 
     }
 }

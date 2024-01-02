@@ -8,6 +8,7 @@ dependencies {
     compileOnly("org.springframework:spring-context")
     compileOnly("com.baomidou:mybatis-plus-annotation")
     compileOnly("org.springframework:spring-web")
+    compileOnly("org.springframework:spring-tx")
 
 //    工具依赖
     compileOnly("org.projectlombok:lombok")

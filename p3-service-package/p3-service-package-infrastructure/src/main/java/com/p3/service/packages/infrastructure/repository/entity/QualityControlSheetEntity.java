@@ -3,12 +3,13 @@ package com.p3.service.packages.infrastructure.repository.entity;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
+import lombok.Data;
+import lombok.experimental.Accessors;
 
 import java.io.Serial;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
-import lombok.Data;
 
 /**
  * 质检单
@@ -16,6 +17,7 @@ import lombok.Data;
  */
 @TableName(value ="quality_control_sheet")
 @Data
+@Accessors(chain = true)
 public class QualityControlSheetEntity implements Serializable {
 
     @Serial

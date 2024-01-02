@@ -9,6 +9,7 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import lombok.Data;
+import lombok.experimental.Accessors;
 
 /**
  * 包裹服务项目
@@ -16,6 +17,7 @@ import lombok.Data;
  */
 @TableName(value ="package_service_item")
 @Data
+@Accessors(chain = true)
 public class PackageServiceItemEntity implements Serializable {
 
     @Serial

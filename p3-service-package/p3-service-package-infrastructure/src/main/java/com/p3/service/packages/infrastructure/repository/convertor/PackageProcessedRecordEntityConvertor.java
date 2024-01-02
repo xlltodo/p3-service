@@ -2,6 +2,7 @@ package com.p3.service.packages.infrastructure.repository.convertor;
 
 import com.p3.service.packages.domain.model.entity.PackageProcessedRecord;
 import com.p3.service.packages.domain.model.factory.PackageProcessedRecordFactory;
+import com.p3.service.packages.infrastructure.repository.entity.PackageProcessedRecordEntity;
 
 public class PackageProcessedRecordEntityConvertor {
 

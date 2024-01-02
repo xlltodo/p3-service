@@ -14,6 +14,11 @@ public class QualityControlSheetServiceItem {
     private String id;
 
     /**
+     * 质检单ID
+     */
+    private String sheetId;
+
+    /**
      * 服务类型
      */
     private String serviceType;
@@ -38,8 +43,9 @@ public class QualityControlSheetServiceItem {
      */
     private LocalDateTime creationTime;
 
-    public QualityControlSheetServiceItem(String id, String serviceType, String serviceName, BigDecimal fee, Integer activated, LocalDateTime creationTime) {
+    public QualityControlSheetServiceItem(String id, String sheetId, String serviceType, String serviceName, BigDecimal fee, Integer activated, LocalDateTime creationTime) {
         this.id = id;
+        this.sheetId = sheetId;
         this.serviceType = serviceType;
         this.serviceName = serviceName;
         this.fee = fee;
@@ -48,7 +54,7 @@ public class QualityControlSheetServiceItem {
     }
 
     public <T> T mapWith(QualityControlSheetServiceItemMapper<T> mapper) {
-        return mapper.map(this.id, this.serviceType, this.serviceName, this.fee, this.activated, this.creationTime);
+        return mapper.map(this.id, this.sheetId, this.serviceType, this.serviceName, this.fee, this.activated, this.creationTime);
     }
 
     public QualityControlSheetSubmitDomainEvent.Service submit() {

@@ -18,14 +18,14 @@ public class PackageMainInfo {
     private String packageCode;
 
     /**
-     * 包裹单号
+     * 单号
      */
-    private List<PackageTrackingNumber> trackingNumbers;
+    List<PackageTrackingNumber> trackingNumbers;
 
     /**
-     * 包裹空间属性
+     *
      */
-    private List<PackageSpatialAttribute> attributes;
+    List<PackageSpatialAttribute> spatialAttributes;
 
     /**
      * 所属客户编号
@@ -82,11 +82,11 @@ public class PackageMainInfo {
      */
     private String shippingMethod;
 
-    public PackageMainInfo(String id, String packageCode, List<PackageTrackingNumber> trackingNumbers, List<PackageSpatialAttribute> attributes, String customerCode, String customerRank, String customerName, String thirdPartyCode, String shippingWarehouse, String destinationCountry, String primaryGoodsType, String secondaryGoodsType, BigDecimal goodsValue, Boolean composited, String shippingMethod) {
+    public PackageMainInfo(String id, String packageCode, List<PackageTrackingNumber> trackingNumbers, List<PackageSpatialAttribute> spatialAttributes, String customerCode, String customerRank, String customerName, String thirdPartyCode, String shippingWarehouse, String destinationCountry, String primaryGoodsType, String secondaryGoodsType, BigDecimal goodsValue, Boolean composited, String shippingMethod) {
         this.id = id;
         this.packageCode = packageCode;
         this.trackingNumbers = trackingNumbers;
-        this.attributes = attributes;
+        this.spatialAttributes = spatialAttributes;
         this.customerCode = customerCode;
         this.customerRank = customerRank;
         this.customerName = customerName;
@@ -101,7 +101,7 @@ public class PackageMainInfo {
     }
 
     public <T> T mapWith(PackageMainInfoMapper<T> mapper) {
-        return mapper.map(this.id, this.packageCode, this.trackingNumbers, this.attributes,
+        return mapper.map(this.id, this.packageCode, this.trackingNumbers, this.spatialAttributes,
                 this.customerCode, this.customerRank, this.customerName,
                 this.thirdPartyCode, this.shippingWarehouse, this.destinationCountry,
                 this.primaryGoodsType, this.secondaryGoodsType, this.goodsValue,

@@ -7,6 +7,7 @@ import com.baomidou.mybatisplus.annotation.TableName;
 import java.io.Serial;
 import java.io.Serializable;
 import lombok.Data;
+import lombok.experimental.Accessors;
 
 /**
  * 集包信息主表
@@ -14,6 +15,7 @@ import lombok.Data;
  */
 @TableName(value ="composite_package_main_info")
 @Data
+@Accessors(chain = true)
 public class CompositePackageMainInfoEntity implements Serializable {
 
     @Serial

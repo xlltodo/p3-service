@@ -1,6 +1,7 @@
 package com.p3.service.packages.application.result;
 
 import lombok.Data;
+import lombok.experimental.Accessors;
 
 import java.io.Serial;
 import java.io.Serializable;
@@ -8,6 +9,7 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @Data
+@Accessors(chain = true)
 public class QualityControlSheetServiceResult implements Serializable {
 
     @Serial

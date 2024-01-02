@@ -8,6 +8,7 @@ import com.baomidou.mybatisplus.annotation.TableName;
 import java.io.Serial;
 import java.io.Serializable;
 import lombok.Data;
+import lombok.experimental.Accessors;
 
 /**
  * 集包包裹关联表
@@ -15,6 +16,7 @@ import lombok.Data;
  */
 @TableName(value ="composite_package_association")
 @Data
+@Accessors(chain = true)
 public class CompositePackageAssociationEntity implements Serializable {
 
     @Serial

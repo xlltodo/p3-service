@@ -1,39 +1,40 @@
 package com.p3.service.packages.domain.model.entity;
 
-import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
-import com.baomidou.mybatisplus.annotation.TableId;
-import com.baomidou.mybatisplus.annotation.TableName;
-import java.io.Serializable;
+import com.p3.service.packages.domain.model.mapper.PackageTrackingNumberMapper;
+
 import java.time.LocalDateTime;
 
-import com.p3.service.packages.domain.model.mapper.PackageTrackingNumberMapper;
-import lombok.Data;
-
 public class PackageTrackingNumber {
+
     /**
      * 主键ID
      */
+    @TableField(value = "id")
     private String id;
 
     /**
      * 包裹编号
      */
+    @TableField(value = "package_code")
     private String packageCode;
 
     /**
      * 单号类型
      */
+    @TableField(value = "number_type")
     private String numberType;
 
     /**
      * 单号
      */
+    @TableField(value = "tracking_number")
     private String trackingNumber;
 
     /**
      * 生成单号时间
      */
+    @TableField(value = "creation_time")
     private LocalDateTime creationTime;
 
     public PackageTrackingNumber(String id, String packageCode, String numberType, String trackingNumber, LocalDateTime creationTime) {

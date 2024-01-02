@@ -8,6 +8,7 @@ import com.baomidou.mybatisplus.annotation.TableName;
 import java.io.Serial;
 import java.io.Serializable;
 import lombok.Data;
+import lombok.experimental.Accessors;
 
 /**
  * 包裹过机记录
@@ -15,6 +16,7 @@ import lombok.Data;
  */
 @TableName(value ="package_processed_record")
 @Data
+@Accessors(chain = true)
 public class PackageProcessedRecordEntity implements Serializable {
 
     @Serial

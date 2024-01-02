@@ -6,6 +6,7 @@ import com.p3.service.packages.application.query.PackageQualityControlSheetQuery
 import com.p3.service.packages.application.result.QualityControlSheetResult;
 import com.p3.service.packages.domain.model.entity.QualityControlSheet;
 import com.p3.service.packages.domain.service.QualityControlSheetDomainService;
+import com.p3.service.packages.domain.service.common.IIdentityGenerator;
 import com.p3.service.packages.infrastructure.client.P3WmsClient;
 import com.p3.service.packages.infrastructure.client.dto.CustomerInfoDTO;
 import com.p3.service.packages.infrastructure.client.dto.ForecastExpressDTO;
@@ -29,6 +30,9 @@ public class QualityControlSheetCommandHandler {
     @Resource
     private P3WmsClient p3WmsClient;
 
+    @Resource
+    private IIdentityGenerator identityGenerator;
+
     public QualityControlSheetResult info(PackageQualityControlSheetQuery query) {
         Optional<QualityControlSheet> packageQualityControlSheetOptional = Optional.ofNullable(qualityControlSheetDomainService.getBuyExpressBillNumber(query.getExpressBillNumber()));
 
@@ -47,7 +51,7 @@ public class QualityControlSheetCommandHandler {
         if(ObjectUtils.isEmpty(customerInfo)) {
             return null;
         }
-        QualityControlSheet qualityControlSheet = QualityControlSheetAssembler.toEntity(command, forecastExpress, customerInfo);
+        QualityControlSheet qualityControlSheet = QualityControlSheetAssembler.toEntity(identityGenerator.generateSnowflakeId(), command, forecastExpress, customerInfo);
         return qualityControlSheetDomainService.createOrUpdate(qualityControlSheet) ? qualityControlSheet : null;
     }
 

@@ -1,7 +1,7 @@
 package com.p3.service.packages.domain.model.entity;
 
 import com.p3.service.packages.domain.event.QualityControlSheetSubmitDomainEvent;
-import com.p3.service.packages.domain.model.mapper.PackageQualityControlSheetMapper;
+import com.p3.service.packages.domain.model.mapper.QualityControlSheetMapper;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -116,19 +116,16 @@ public class QualityControlSheet {
     private LocalDateTime inspectionTime;
 
     /**
+     * 商品
+     */
+    private List<QualityControlSheetGoodsInfo> goodsInfos;
+
+    /**
      * 原始商品备注
      */
     private String originalProductRemarks;
 
-    public QualityControlSheet(String id, String expressBillNumber, List<QualityControlSheetPackage> packages,
-                               List<QualityControlSheetServiceItem> services,
-                               String customerCode, String storageLocation, Integer expectedPackageCount,
-                               Integer actualPackageCount, Integer expectedProductCount,
-                               Integer actualProductCount, BigDecimal totalProductValue,
-                               String warehouseCode, String warehouseName, String destinationRegionCode,
-                               String destinationRegionName, String expressCompanyCode,
-                               String expressCompanyName, String packageStatus, String inspectorId,
-                               String inspectorName, LocalDateTime inspectionTime, String originalProductRemarks) {
+    public QualityControlSheet(String id, String expressBillNumber, List<QualityControlSheetPackage> packages, List<QualityControlSheetServiceItem> services, String customerCode, String storageLocation, Integer expectedPackageCount, Integer actualPackageCount, Integer expectedProductCount, Integer actualProductCount, BigDecimal totalProductValue, String warehouseCode, String warehouseName, String destinationRegionCode, String destinationRegionName, String expressCompanyCode, String expressCompanyName, String packageStatus, String inspectorId, String inspectorName, LocalDateTime inspectionTime, List<QualityControlSheetGoodsInfo> goodsInfos, String originalProductRemarks) {
         this.id = id;
         this.expressBillNumber = expressBillNumber;
         this.packages = packages;
@@ -150,10 +147,11 @@ public class QualityControlSheet {
         this.inspectorId = inspectorId;
         this.inspectorName = inspectorName;
         this.inspectionTime = inspectionTime;
+        this.goodsInfos = goodsInfos;
         this.originalProductRemarks = originalProductRemarks;
     }
 
-    public <T> T mapWith(PackageQualityControlSheetMapper<T> mapper) {
+    public <T> T mapWith(QualityControlSheetMapper<T> mapper) {
         return mapper.map(this.id, this.expressBillNumber, this.packages, this.services, this.customerCode, this.storageLocation,
                 this.expectedPackageCount, this.actualPackageCount, this.expectedProductCount,
                 this.actualProductCount, this.totalProductValue, this.warehouseCode,
@@ -163,7 +161,21 @@ public class QualityControlSheet {
     }
 
     public String getUniqueIdentifier() {
+        return this.id;
+    }
+
+    public String getExpressBillNumber() {
         return this.expressBillNumber;
+    }
+
+    public List<QualityControlSheetPackage> getPackages() {
+        return this.packages;
+    }
+    public List<QualityControlSheetServiceItem> getServices() {
+        return this.services;
+    }
+    public List<QualityControlSheetGoodsInfo> getGoodsInfos() {
+        return this.goodsInfos;
     }
 
     public QualityControlSheetSubmitDomainEvent submit() {

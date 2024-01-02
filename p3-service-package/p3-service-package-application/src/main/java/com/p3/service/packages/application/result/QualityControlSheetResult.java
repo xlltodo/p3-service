@@ -28,7 +28,7 @@ public class QualityControlSheetResult implements Serializable {
     private List<QualityControlSheetPackageResult> packages;
 
     @Schema(description = "质检单服务信息")
-    private List<QualityControlSheetServiceCommand> services;
+    private List<QualityControlSheetServiceResult> services;
 
     @Schema(description = "客户代号")
     private String customerCode;

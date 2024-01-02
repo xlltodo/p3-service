@@ -1,8 +1,9 @@
 package com.p3.service.packages.infrastructure.repository.convertor;
 
 import com.p3.service.packages.domain.model.entity.PackageMainInfo;
+import com.p3.service.packages.infrastructure.repository.entity.PackageMainInfoEntity;
 
-public class PackageMainInfoEntityConvertor {
+public class PackageMainInfoConvertor {
 
     public static PackageMainInfoEntity convertToDataEntity(PackageMainInfo mainInfo) {
         // 注意：此处未处理 trackingNumbers 和 attributes 字段

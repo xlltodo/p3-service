@@ -7,6 +7,7 @@ import java.io.Serial;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import lombok.Data;
+import lombok.experimental.Accessors;
 
 /**
  * 集包追踪编号表
@@ -14,6 +15,7 @@ import lombok.Data;
  */
 @TableName(value ="composite_package_tracking_number")
 @Data
+@Accessors(chain = true)
 public class CompositePackageTrackingNumberEntity implements Serializable {
 
     @Serial

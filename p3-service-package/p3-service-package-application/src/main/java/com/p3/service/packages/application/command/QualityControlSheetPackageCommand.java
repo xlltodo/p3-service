@@ -12,9 +12,6 @@ public class QualityControlSheetPackageCommand implements Serializable {
     @Serial
     private static final long serialVersionUID = -8482952137684761397L;
 
-    @Schema(description = "主键ID")
-    private String id;
-
     @Schema(description = "质检单ID")
     private String sheetId;
 

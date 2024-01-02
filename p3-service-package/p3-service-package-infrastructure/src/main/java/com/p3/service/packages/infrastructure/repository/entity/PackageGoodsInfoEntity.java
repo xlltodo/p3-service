@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
+import lombok.experimental.Accessors;
 
 import java.io.Serial;
 import java.io.Serializable;
@@ -15,6 +16,7 @@ import java.math.BigDecimal;
  */
 @TableName(value ="package_goods_info")
 @Data
+@Accessors(chain = true)
 public class PackageGoodsInfoEntity implements Serializable {
 
     @Serial

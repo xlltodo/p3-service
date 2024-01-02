@@ -1,6 +1,7 @@
 package com.p3.service.packages.domain.model.factory;
 
 import com.p3.service.packages.domain.model.entity.QualityControlSheet;
+import com.p3.service.packages.domain.model.entity.QualityControlSheetGoodsInfo;
 import com.p3.service.packages.domain.model.entity.QualityControlSheetPackage;
 import com.p3.service.packages.domain.model.entity.QualityControlSheetServiceItem;
 
@@ -21,12 +22,13 @@ public class QualityControlSheetFactory {
                                              String destinationRegionName, String expressCompanyCode,
                                              String expressCompanyName, String packageStatus,
                                              String inspectorId, String inspectorName,
-                                             LocalDateTime inspectionTime, String originalProductRemarks) {
+                                             LocalDateTime inspectionTime, List<QualityControlSheetGoodsInfo> goodsInfos,
+                                             String originalProductRemarks) {
         return new QualityControlSheet(id, expressBillNumber, packages, services, customerCode, storageLocation,
                 expectedPackageCount, actualPackageCount, expectedProductCount,
                 actualProductCount, totalProductValue, warehouseCode, warehouseName,
                 destinationRegionCode, destinationRegionName, expressCompanyCode,
                 expressCompanyName, packageStatus, inspectorId, inspectorName,
-                inspectionTime, originalProductRemarks);
+                inspectionTime, goodsInfos, originalProductRemarks);
     }
 }

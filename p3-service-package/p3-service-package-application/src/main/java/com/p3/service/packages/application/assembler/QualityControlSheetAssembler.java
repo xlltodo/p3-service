@@ -3,6 +3,7 @@ package com.p3.service.packages.application.assembler;
 import com.p3.service.packages.application.command.QualityControlSheetCommand;
 import com.p3.service.packages.application.result.QualityControlSheetResult;
 import com.p3.service.packages.domain.model.entity.QualityControlSheet;
+import com.p3.service.packages.domain.model.entity.QualityControlSheetServiceItem;
 import com.p3.service.packages.domain.model.factory.QualityControlSheetFactory;
 import com.p3.service.packages.infrastructure.client.dto.CustomerInfoDTO;
 import com.p3.service.packages.infrastructure.client.dto.ForecastExpressDTO;
@@ -13,11 +14,12 @@ import java.util.stream.Collectors;
 public class QualityControlSheetAssembler {
 
 
-    public static QualityControlSheet toEntity(QualityControlSheetCommand command, ForecastExpressDTO forecastExpress, CustomerInfoDTO customerInfo) {
+    public static QualityControlSheet toEntity(String sheetId, QualityControlSheetCommand command, ForecastExpressDTO forecastExpress, CustomerInfoDTO customerInfo) {
         return QualityControlSheetFactory.create(
-                command.getId(),
+                sheetId,
                 command.getExpressBillNumber(),
-                QualityControlSheetPackageAssembler.toEntities(command.getPackages()),
+                QualityControlSheetPackageAssembler.toEntities(sheetId, command.getPackages()),
+                QualityControlSheetServiceItemAssembler.toEntities(sheetId, command.getServices()),
                 command.getCustomerCode(),
                 command.getStorageLocation(),
                 forecastExpress.getNumberOfPackages(),
@@ -35,12 +37,13 @@ public class QualityControlSheetAssembler {
                 null,
                 null,
                 null,
+                QualityControlSheetGoodsInfoAssembler.toEntities(sheetId, forecastExpress.getCommodityLists()),
                 forecastExpress.getRemark()
         );
     }
 
     public static QualityControlSheetResult toResult(QualityControlSheet qualityControlSheet) {
-        return qualityControlSheet.mapWith(((id, expressBillNumber, packages, customerCode, storageLocation,
+        return qualityControlSheet.mapWith(((id, expressBillNumber, packages, services, customerCode, storageLocation,
                                              expectedPackageCount, actualPackageCount, expectedProductCount,
                                              actualProductCount, totalProductValue, warehouseCode,
                                              warehouseName, destinationRegionCode, destinationRegionName,
@@ -49,6 +52,7 @@ public class QualityControlSheetAssembler {
                 .setId(id)
                 .setExpressBillNumber(expressBillNumber)
                 .setPackages(Optional.ofNullable(packages).map(QualityControlSheetPackageAssembler::toResults).orElse(null))
+                .setServices(Optional.ofNullable(services).map(QualityControlSheetServiceItemAssembler::toResults).orElse(null))
                 .setCustomerCode(customerCode)
                 .setStorageLocation(storageLocation)
                 .setExpectedPackageCount(expectedPackageCount)

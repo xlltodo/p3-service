@@ -3,11 +3,12 @@ package com.p3.service.packages.infrastructure.repository.entity;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
+import lombok.Data;
+import lombok.experimental.Accessors;
 
 import java.io.Serial;
 import java.io.Serializable;
 import java.math.BigDecimal;
-import lombok.Data;
 
 /**
  * 包裹信息主表
@@ -15,6 +16,7 @@ import lombok.Data;
  */
 @TableName(value ="package_main_info")
 @Data
+@Accessors(chain = true)
 public class PackageMainInfoEntity implements Serializable {
 
     @Serial
@@ -90,7 +92,7 @@ public class PackageMainInfoEntity implements Serializable {
      * 集包标识
      */
     @TableField(value = "composited")
-    private Integer composited;
+    private Boolean composited;
 
     /**
      * 运输方式

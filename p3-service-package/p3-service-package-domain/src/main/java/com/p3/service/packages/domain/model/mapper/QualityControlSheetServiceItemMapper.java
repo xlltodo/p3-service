@@ -5,5 +5,5 @@ import java.time.LocalDateTime;
 
 public interface QualityControlSheetServiceItemMapper<T> {
 
-    T map(String id, String serviceType, String serviceName, BigDecimal fee, Integer activated, LocalDateTime creationTime);
+    T map(String id, String sheetId, String serviceType, String serviceName, BigDecimal fee, Integer activated, LocalDateTime creationTime);
 }
