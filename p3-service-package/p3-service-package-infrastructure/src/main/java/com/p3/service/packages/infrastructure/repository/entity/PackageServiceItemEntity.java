@@ -30,6 +30,12 @@ public class PackageServiceItemEntity implements Serializable {
     private String id;
 
     /**
+     * 包裹编号
+     */
+    @TableField(value = "package_code")
+    private String packageCode;
+
+    /**
      * 服务类型
      */
     @TableField(value = "service_type")

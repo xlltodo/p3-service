@@ -35,6 +35,12 @@ public class PackageSpatialAttributeEntity implements Serializable {
     private String packageCode;
 
     /**
+     * 录入节点
+     */
+    @TableField(value = "entry_node")
+    private String entryNode;
+
+    /**
      * 长
      */
     @TableField(value = "length")

@@ -77,7 +77,19 @@ public class PackageGoodsInfoEntity implements Serializable {
     private BigDecimal totalPrice;
 
     /**
+     * 一级货品类型
+     */
+    @TableField(value = "primary_goods_type")
+    private String primaryGoodsType;
+
+    /**
      * 二级货品类型
+     */
+    @TableField(value = "secondary_goods_type")
+    private String secondaryGoodsType;
+
+    /**
+     * 货品图片
      */
     @TableField(value = "image_url")
     private String imageUrl;

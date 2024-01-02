@@ -19,6 +19,8 @@ public class ForecastExpressDTO implements Serializable {
     private String customerLevel;
     private String thirdPartyCustomerCode;
     private String thirdPartyCustomerLevel;
+    private Customer masterCustomer;
+    private Customer thirdPartyCustomer;
     private String expressNo;
     private String expressCompany;
     private String sendAddress;
@@ -70,5 +72,19 @@ public class ForecastExpressDTO implements Serializable {
         private String thirdPartyCustomerCode;
         private String thirdPartyCustomerLevel;
         private String productImg;
+    }
+
+    @Data
+    public static class Customer implements Serializable {
+
+        @Serial
+        private static final long serialVersionUID = 8154403251697236527L;
+
+        private String nickname;
+        private String code;
+        private String level;
+        private String type;
+        private String primaryFlag;
+        private String remark;
     }
 }

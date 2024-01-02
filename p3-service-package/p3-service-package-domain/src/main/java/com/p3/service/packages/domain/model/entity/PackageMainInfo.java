@@ -23,9 +23,14 @@ public class PackageMainInfo {
     List<PackageTrackingNumber> trackingNumbers;
 
     /**
-     *
+     * 空间属性
      */
     List<PackageSpatialAttribute> spatialAttributes;
+
+    /**
+     * 服务
+     */
+    List<PackageServiceItem> serviceItems;
 
     /**
      * 所属客户编号
@@ -33,19 +38,29 @@ public class PackageMainInfo {
     private String customerCode;
 
     /**
-     * 所属客户等级
-     */
-    private String customerRank;
-
-    /**
      * 所属客户名称
      */
-    private String customerName;
+    private String customerNickname;
+
+    /**
+     * 所属客户等级
+     */
+    private String customerLevel;
+
+    /**
+     * 所属客户类型
+     */
+    private String customerType;
 
     /**
      * 第三方客户代号
      */
-    private String thirdPartyCode;
+    private String thirdPartyCustomerCode;
+
+    /**
+     * 第三方客户等级
+     */
+    private String thirdPartyCustomerLevel;
 
     /**
      * 寄出仓库
@@ -82,15 +97,23 @@ public class PackageMainInfo {
      */
     private String shippingMethod;
 
-    public PackageMainInfo(String id, String packageCode, List<PackageTrackingNumber> trackingNumbers, List<PackageSpatialAttribute> spatialAttributes, String customerCode, String customerRank, String customerName, String thirdPartyCode, String shippingWarehouse, String destinationCountry, String primaryGoodsType, String secondaryGoodsType, BigDecimal goodsValue, Boolean composited, String shippingMethod) {
+    /**
+     * 商品信息
+     */
+    private List<PackageGoodsInfo> goodsInfos;
+
+    public PackageMainInfo(String id, String packageCode, List<PackageTrackingNumber> trackingNumbers, List<PackageSpatialAttribute> spatialAttributes, List<PackageServiceItem> serviceItems, String customerCode, String customerNickname, String customerLevel, String customerType, String thirdPartyCustomerCode, String thirdPartyCustomerLevel, String shippingWarehouse, String destinationCountry, String primaryGoodsType, String secondaryGoodsType, BigDecimal goodsValue, Boolean composited, String shippingMethod) {
         this.id = id;
         this.packageCode = packageCode;
         this.trackingNumbers = trackingNumbers;
         this.spatialAttributes = spatialAttributes;
+        this.serviceItems = serviceItems;
         this.customerCode = customerCode;
-        this.customerRank = customerRank;
-        this.customerName = customerName;
-        this.thirdPartyCode = thirdPartyCode;
+        this.customerNickname = customerNickname;
+        this.customerLevel = customerLevel;
+        this.customerType = customerType;
+        this.thirdPartyCustomerCode = thirdPartyCustomerCode;
+        this.thirdPartyCustomerLevel = thirdPartyCustomerLevel;
         this.shippingWarehouse = shippingWarehouse;
         this.destinationCountry = destinationCountry;
         this.primaryGoodsType = primaryGoodsType;
@@ -101,9 +124,9 @@ public class PackageMainInfo {
     }
 
     public <T> T mapWith(PackageMainInfoMapper<T> mapper) {
-        return mapper.map(this.id, this.packageCode, this.trackingNumbers, this.spatialAttributes,
-                this.customerCode, this.customerRank, this.customerName,
-                this.thirdPartyCode, this.shippingWarehouse, this.destinationCountry,
+        return mapper.map(this.id, this.packageCode, this.trackingNumbers, this.spatialAttributes, this.serviceItems,
+                this.customerCode, this.customerNickname, this.customerLevel, this.customerType,
+                this.thirdPartyCustomerCode, this.thirdPartyCustomerLevel, this.shippingWarehouse, this.destinationCountry,
                 this.primaryGoodsType, this.secondaryGoodsType, this.goodsValue,
                 this.composited, this.shippingMethod);
     }

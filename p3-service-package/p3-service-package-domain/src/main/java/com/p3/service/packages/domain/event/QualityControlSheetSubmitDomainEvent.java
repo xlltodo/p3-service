@@ -35,9 +35,34 @@ public class QualityControlSheetSubmitDomainEvent extends SyncInProcessBaseDomai
     private List<Service> services;
 
     /**
-     * 客户编号
+     * 所属客户编号
      */
     private String customerCode;
+
+    /**
+     * 所属客户名称
+     */
+    private String customerNickname;
+
+    /**
+     * 所属客户等级
+     */
+    private String customerLevel;
+
+    /**
+     * 所属客户类型
+     */
+    private String customerType;
+
+    /**
+     * 第三方客户代号
+     */
+    private String thirdPartyCustomerCode;
+
+    /**
+     * 第三方客户等级
+     */
+    private String thirdPartyCustomerLevel;
 
     /**
      * 存放库位

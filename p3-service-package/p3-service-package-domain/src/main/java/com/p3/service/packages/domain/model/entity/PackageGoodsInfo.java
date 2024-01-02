@@ -52,7 +52,7 @@ public class PackageGoodsInfo {
     private BigDecimal totalPrice;
 
     /**
-     * 二级货品类型
+     * 货品图片
      */
     private String imageUrl;
 

@@ -1,5 +1,6 @@
 package com.p3.service.packages.domain.model.entity;
 
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.p3.service.packages.domain.model.mapper.PackageServiceItemMapper;
 
 import java.math.BigDecimal;
@@ -11,6 +12,11 @@ public class PackageServiceItem {
      * 主键ID
      */
     private String id;
+
+    /**
+     * 包裹编号
+     */
+    private String packageCode;
 
     /**
      * 服务类型
@@ -37,8 +43,9 @@ public class PackageServiceItem {
      */
     private LocalDateTime creationTime;
 
-    public PackageServiceItem(String id, String serviceType, String serviceName, BigDecimal fee, Integer activated, LocalDateTime creationTime) {
+    public PackageServiceItem(String id, String packageCode, String serviceType, String serviceName, BigDecimal fee, Integer activated, LocalDateTime creationTime) {
         this.id = id;
+        this.packageCode = packageCode;
         this.serviceType = serviceType;
         this.serviceName = serviceName;
         this.fee = fee;

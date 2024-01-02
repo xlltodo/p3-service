@@ -31,7 +31,7 @@ public class QualityControlSheetServiceItemRepository implements IQualityControl
         if(CollectionUtils.isEmpty(serviceItems)) {
             return true;
         }
-        serviceItems.stream().map(serviceItem -> qualityControlSheetServiceItemMapper.insert(QualityControlSheetServiceItemEntityConvertor.convertToDataEntity(serviceItem)));
+        serviceItems.forEach(serviceItem -> qualityControlSheetServiceItemMapper.insert(QualityControlSheetServiceItemEntityConvertor.convertToDataEntity(serviceItem)));
         return true;
     }
 }

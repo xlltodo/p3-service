@@ -41,22 +41,34 @@ public class PackageMainInfoEntity implements Serializable {
     private String customerCode;
 
     /**
-     * 所属客户等级
-     */
-    @TableField(value = "customer_rank")
-    private String customerRank;
-
-    /**
      * 所属客户名称
      */
-    @TableField(value = "customer_name")
-    private String customerName;
+    @TableField(value = "customer_nickname")
+    private String customerNickname;
+
+    /**
+     * 所属客户等级
+     */
+    @TableField(value = "customer_level")
+    private String customerLevel;
+
+    /**
+     * 所属客户类型
+     */
+    @TableField(value = "customer_type")
+    private String customerType;
 
     /**
      * 第三方客户代号
      */
-    @TableField(value = "third_party_code")
-    private String thirdPartyCode;
+    @TableField(value = "third_party_customer_code")
+    private String thirdPartyCustomerCode;
+
+    /**
+     * 第三方客户等级
+     */
+    @TableField(value = "third_party_customer_level")
+    private String thirdPartyCustomerLevel;
 
     /**
      * 寄出仓库

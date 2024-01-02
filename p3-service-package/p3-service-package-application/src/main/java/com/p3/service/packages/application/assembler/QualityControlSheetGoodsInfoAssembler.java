@@ -11,7 +11,7 @@ public class QualityControlSheetGoodsInfoAssembler {
     public static QualityControlSheetGoodsInfo toEntity(String sheetId, ForecastExpressDTO.Commodity commodity) {
 
         return new QualityControlSheetGoodsInfo(
-                commodity.getId(),
+                null,
                 sheetId,
                 commodity.getGoodsName(),
                 commodity.getGoodsName(),

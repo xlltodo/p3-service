@@ -21,7 +21,7 @@ public class CustomerInfoDTO implements Serializable {
 
     // 第三方客户相关属性
     private String thirdPartyNickname;  // 第三方客户昵称
-    private String thirdPartyCode;      // 第三方客户代号
+    private String thirdPartyCustomerCode;      // 第三方客户代号
     private String thirdPartyLevel;     // 第三方客户等级
     private String thirdPartyType;      // 第三方客户类型
     private String thirdPartyRemark;    // 第三方客户备注

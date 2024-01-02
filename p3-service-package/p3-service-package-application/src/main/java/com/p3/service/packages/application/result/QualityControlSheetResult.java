@@ -90,9 +90,6 @@ public class QualityControlSheetResult implements Serializable {
     @Schema(description = "物品图片")
     private String itemImage;
 
-    @Schema(description = "商品列表")
-    List<QualityControlSheetGoodsInfoResult> goods;
-
     @Schema(description = "原始商品备注")
     private String originalProductRemarks;
 
@@ -107,5 +104,8 @@ public class QualityControlSheetResult implements Serializable {
 
     @Schema(description = "质检时间")
     private LocalDateTime inspectionTime;
+
+    @Schema(description = "商品列表")
+    List<QualityControlSheetGoodsInfoResult> goods;
 
 }

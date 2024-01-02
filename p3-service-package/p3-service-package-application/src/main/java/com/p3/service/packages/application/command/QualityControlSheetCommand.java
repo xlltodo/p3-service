@@ -78,4 +78,7 @@ public class QualityControlSheetCommand implements Serializable {
     @NotBlank(message = "快递公司名称不能为空")
     @Schema(description = "快递公司名称")
     private String expressCompanyName;
+
+    @Schema(description = "异常件标识（0否1是）", defaultValue = "true")
+    private Boolean exceptional;
 }

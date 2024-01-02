@@ -22,5 +22,5 @@ public interface P3WmsClient {
     P3ApiResult<String> expressReceipt(@RequestBody List<ForecastExpressReceiptDTO> forecastExpressReceipts);
 
     @GetMapping("/internal/customer/get")
-    P3ApiResult<CustomerInfoDTO> getCustomerInfo(@RequestParam(value = "customerCode") String customerCode, @RequestParam(value = "thirdPartyCustomerCode") String thirdPartyCustomerCode);
+    P3ApiResult<CustomerInfoDTO> getCustomerInfo(@RequestParam(value = "masterCustomerCode") String customerCode, @RequestParam(value = "thirdPartyCustomerCode") String thirdPartyCustomerCode);
 }

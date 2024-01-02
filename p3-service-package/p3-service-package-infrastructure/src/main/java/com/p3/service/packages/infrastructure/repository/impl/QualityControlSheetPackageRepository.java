@@ -31,7 +31,7 @@ public class QualityControlSheetPackageRepository implements IQualityControlShee
         if(CollectionUtils.isEmpty(packages)) {
             return true;
         }
-        packages.stream().map(packageItem -> qualityControlSheetPackageMapper.insert(QualityControlSheetPackageEntityConvertor.convertToDataEntity(packageItem)));
+        packages.forEach(sheetPackage -> qualityControlSheetPackageMapper.insert(QualityControlSheetPackageEntityConvertor.convertToDataEntity(sheetPackage)));
         return true;
     }
 }

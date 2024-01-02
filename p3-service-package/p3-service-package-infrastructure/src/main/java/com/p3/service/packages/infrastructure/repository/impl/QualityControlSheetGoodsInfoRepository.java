@@ -34,7 +34,7 @@ public class QualityControlSheetGoodsInfoRepository implements IQualityControlSh
         if(CollectionUtils.isEmpty(goodsInfos)) {
             return true;
         }
-        goodsInfos.stream().map(goodsInfo -> qualityControlSheetGoodsInfoMapper.insert(QualityControlSheetGoodsInfoEntityConvertor.convertToDataEntity(goodsInfo)));
+        goodsInfos.forEach(goodsInfo -> qualityControlSheetGoodsInfoMapper.insert(QualityControlSheetGoodsInfoEntityConvertor.convertToDataEntity(goodsInfo)));
         return true;
     }
 }

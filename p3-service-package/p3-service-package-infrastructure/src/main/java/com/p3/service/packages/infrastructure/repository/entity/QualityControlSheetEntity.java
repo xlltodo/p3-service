@@ -147,7 +147,7 @@ public class QualityControlSheetEntity implements Serializable {
      * 异常件标识（0否1是）
      */
     @TableField(value = "exceptional")
-    private Integer exceptional;
+    private Boolean exceptional;
 
     /**
      * 物品图片

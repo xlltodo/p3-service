@@ -3,6 +3,7 @@ package com.p3.service.packages.adapter.v1.api;
 import com.p3.service.packages.adapter.bean.ApiResponse;
 import com.p3.service.packages.application.command.QualityControlSheetCommand;
 import com.p3.service.packages.application.handler.QualityControlSheetCommandHandler;
+import com.p3.service.packages.application.handler.QualityControlSheetQueryHandler;
 import com.p3.service.packages.application.query.PackageQualityControlSheetQuery;
 import com.p3.service.packages.application.result.QualityControlSheetResult;
 import io.swagger.v3.oas.annotations.Operation;
@@ -24,13 +25,15 @@ import java.util.Optional;
 public class QualityControlSheetController {
 
     @Resource
+    private QualityControlSheetQueryHandler qualityControlSheetQueryHandler;
+    @Resource
     private QualityControlSheetCommandHandler qualityControlSheetCommandHandler;
 
     @Operation(summary = "获取QC详情")
     @GetMapping("/")
     public ApiResponse<QualityControlSheetResult> info(@Validated PackageQualityControlSheetQuery query) {
 
-        return ApiResponse.success(qualityControlSheetCommandHandler.info(query));
+        return ApiResponse.success(qualityControlSheetQueryHandler.info(query));
     }
 
     @Operation(summary = "保存")
@@ -47,7 +50,7 @@ public class QualityControlSheetController {
                 errors.put(fieldName, errorMessage);
             });
             log.info("错误：{}", errors);
-            return ApiResponse.fail("参数校验失败！");
+            return ApiResponse.fail("参数校验失败！" + errors);
         }
 
         return ApiResponse.success(Optional.ofNullable(qualityControlSheetCommandHandler.save(command)).isPresent());

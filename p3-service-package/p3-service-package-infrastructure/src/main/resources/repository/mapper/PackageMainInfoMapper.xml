@@ -8,9 +8,9 @@
             <id property="id" column="id" jdbcType="VARCHAR"/>
             <result property="packageCode" column="package_code" jdbcType="VARCHAR"/>
             <result property="customerCode" column="customer_code" jdbcType="VARCHAR"/>
-            <result property="customerRank" column="customer_rank" jdbcType="VARCHAR"/>
-            <result property="customerName" column="customer_name" jdbcType="VARCHAR"/>
-            <result property="thirdPartyCode" column="third_party_code" jdbcType="VARCHAR"/>
+            <result property="customerNickname" column="customer_nickname" jdbcType="VARCHAR"/>
+            <result property="customerLevel" column="customer_level" jdbcType="VARCHAR"/>
+            <result property="thirdPartyCustomerCode" column="third_party_customer_code" jdbcType="VARCHAR"/>
             <result property="shippingWarehouse" column="shipping_warehouse" jdbcType="VARCHAR"/>
             <result property="destinationCountry" column="destination_country" jdbcType="VARCHAR"/>
             <result property="primaryGoodsType" column="primary_goods_type" jdbcType="VARCHAR"/>
@@ -22,7 +22,7 @@
 
     <sql id="Base_Column_List">
         id,package_code,customer_code,
-        customer_rank,customer_name,third_party_code,
+        customer_level,customer_nickname,third_party_customer_code,
         shipping_warehouse,destination_country,primary_goods_type,
         secondary_goods_type,goods_value,composited,
         shipping_method

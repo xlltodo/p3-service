@@ -22,14 +22,14 @@ public class CompositePackageInfoResult implements Serializable {
     @Schema(description = "所属客户编号")
     private String customerCode;
 
-    @Schema(description = "所属客户等级")
-    private String customerRank;
-
     @Schema(description = "所属客户名称")
-    private String customerName;
+    private String customerNickname;
+
+    @Schema(description = "所属客户等级")
+    private String customerLevel;
 
     @Schema(description = "第三方客户代号")
-    private String thirdPartyCode;
+    private String thirdPartyCustomerCode;
 
     @Schema(description = "寄出仓库")
     private String shippingWarehouse;
