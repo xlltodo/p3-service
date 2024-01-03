@@ -2,12 +2,14 @@ package com.p3.service.packages.application.result;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
+import lombok.experimental.Accessors;
 
 import java.io.Serial;
 import java.io.Serializable;
 import java.math.BigDecimal;
 
 @Data
+@Accessors(chain = true)
 public class QualityControlSheetGoodsInfoResult implements Serializable {
 
     @Serial

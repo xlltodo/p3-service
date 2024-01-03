@@ -56,10 +56,10 @@ public class QualityControlSheetCommandHandler {
     }
 
     @Transactional(rollbackFor = Exception.class)
-    public Boolean submit(QualityControlSheetCommand command) {
+    public String submit(QualityControlSheetCommand command) {
 
         QualityControlSheet qualityControlSheet = this.save(command);
         qualityControlSheet.submitQualityControlSheet("", "");
-        return qualityControlSheetDomainService.submit(qualityControlSheet);
+        return qualityControlSheetDomainService.submit(qualityControlSheet) ? qualityControlSheet.getExpressBillNumber() : null;
     }
 }

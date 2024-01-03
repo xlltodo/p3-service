@@ -1,15 +1,18 @@
 package com.p3.service.packages.application.assembler;
 
 import com.p3.service.packages.application.command.QualityControlSheetCommand;
+import com.p3.service.packages.application.result.QualityControlSheetGoodsInfoResult;
+import com.p3.service.packages.application.result.QualityControlSheetPackageResult;
 import com.p3.service.packages.application.result.QualityControlSheetResult;
+import com.p3.service.packages.domain.model.entity.PackageProcessedRecord;
 import com.p3.service.packages.domain.model.entity.QualityControlSheet;
-import com.p3.service.packages.domain.model.entity.QualityControlSheetServiceItem;
 import com.p3.service.packages.domain.model.factory.QualityControlSheetFactory;
 import com.p3.service.packages.infrastructure.client.dto.CustomerInfoDTO;
 import com.p3.service.packages.infrastructure.client.dto.ForecastExpressDTO;
-import io.swagger.v3.oas.annotations.media.Schema;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -59,7 +62,7 @@ public class QualityControlSheetAssembler {
                                             totalProductValue, warehouseCode, warehouseName, destinationRegionCode,
                                             destinationRegionName, expressCompanyCode, expressCompanyName, exceptional,
                                             itemImage, originalProductRemarks, packageStatus, inspectorId,
-                                            inspectorName, inspectionTime, goodsInfos) ->  new QualityControlSheetResult()
+                                            inspectorName, inspectionTime, goodsInfos) -> new QualityControlSheetResult()
                 .setId(id)
                 .setExpressBillNumber(expressBillNumber)
                 .setPackages(Optional.ofNullable(packages).map(QualityControlSheetPackageAssembler::toResults).orElse(null))
@@ -96,6 +99,7 @@ public class QualityControlSheetAssembler {
         return new QualityControlSheetResult()
                 .setExpressBillNumber(forecastExpressDTO.getExpressNo())
                 .setPackages(null)
+                .setServices(null)
                 .setCustomerCode(forecastExpressDTO.getCustomerCode())
                 .setCustomerNickname(forecastExpressDTO.getCustomerNickname())
                 .setCustomerLevel(forecastExpressDTO.getCustomerLevel())
@@ -118,6 +122,67 @@ public class QualityControlSheetAssembler {
                 .setInspectorId(null)
                 .setInspectorName(null)
                 .setInspectionTime(null)
-                .setOriginalProductRemarks(forecastExpressDTO.getRemark());
+                .setOriginalProductRemarks(forecastExpressDTO.getRemark())
+                .setGoods(Optional.ofNullable(forecastExpressDTO.getCommodityLists()).map(commodities -> commodities.stream().map(QualityControlSheetAssembler::toResult).collect(Collectors.toList())).orElse(null));
+    }
+
+    public static QualityControlSheetResult toResult(ForecastExpressDTO forecastExpressDTO, PackageProcessedRecord packageProcessedRecord) {
+
+        return packageProcessedRecord.mapWith((id, ticketsNum, weight, length, width, height, volume, machine) -> {
+
+
+            List<QualityControlSheetPackageResult> packageResults = new ArrayList<>();
+            for (int i = forecastExpressDTO.getNumberOfPackages(); i > 0; i--) {
+                packageResults.add(new QualityControlSheetPackageResult()
+                        .setWeight(weight)
+                        .setLength(length)
+                        .setWidth(width)
+                        .setHeight(height)
+                        .setVolume(volume));
+            }
+
+            return new QualityControlSheetResult()
+                    .setExpressBillNumber(forecastExpressDTO.getExpressNo())
+                    .setPackages(packageResults)
+                    .setServices(null)
+                    .setCustomerCode(forecastExpressDTO.getCustomerCode())
+                    .setCustomerNickname(forecastExpressDTO.getCustomerNickname())
+                    .setCustomerLevel(forecastExpressDTO.getCustomerLevel())
+                    .setCustomerType(forecastExpressDTO.getMasterCustomer().getType())
+                    .setThirdPartyCustomerCode(forecastExpressDTO.getThirdPartyCustomerCode())
+                    .setThirdPartyCustomerLevel(forecastExpressDTO.getThirdPartyCustomerLevel())
+                    .setStorageLocation(null)
+                    .setExpectedPackageCount(forecastExpressDTO.getNumberOfPackages())
+                    .setActualPackageCount(1)
+                    .setExpectedProductCount(0)
+                    .setActualProductCount(0)
+                    .setTotalProductValue(Optional.ofNullable(forecastExpressDTO.getCommodityLists()).map(commodities -> commodities.stream().map(ForecastExpressDTO.Commodity::getTotalPrice).reduce(new BigDecimal("0.000"), BigDecimal::add)).orElse(BigDecimal.ZERO))
+                    .setWarehouseCode(null)
+                    .setWarehouseName(null)
+                    .setDestinationRegionCode(null)
+                    .setDestinationRegionName(forecastExpressDTO.getReceiveAddress())
+                    .setExpressCompanyCode(null)
+                    .setExpressCompanyName(forecastExpressDTO.getExpressCompany())
+                    .setPackageStatus(null)
+                    .setInspectorId(null)
+                    .setInspectorName(null)
+                    .setInspectionTime(null)
+                    .setOriginalProductRemarks(forecastExpressDTO.getRemark())
+                    .setGoods(Optional.ofNullable(forecastExpressDTO.getCommodityLists()).map(commodities -> commodities.stream().map(QualityControlSheetAssembler::toResult).collect(Collectors.toList())).orElse(null));
+        });
+    }
+
+    public static QualityControlSheetGoodsInfoResult toResult(ForecastExpressDTO.Commodity commodity) {
+        return new QualityControlSheetGoodsInfoResult()
+                .setId(commodity.getId())
+                .setProductName(commodity.getGoodsName())
+                .setGoodsName(commodity.getGoodsName())
+                .setGoodsType(commodity.getE3GoodsTypeName())
+                .setSpecification(commodity.getGoodsSpecification())
+                .setShipmentQuantity(commodity.getQuantityShipped())
+                .setUnitPrice(commodity.getUnitPrice())
+                .setTotalPrice(commodity.getTotalPrice())
+                .setImageUrl(commodity.getProductImg());
+
     }
 }

@@ -1,6 +1,5 @@
 package com.p3.service.packages.domain.model.entity;
 
-import com.baomidou.mybatisplus.annotation.TableField;
 import com.p3.service.packages.domain.event.QualityControlSheetSubmitDomainEvent;
 import com.p3.service.packages.domain.model.mapper.QualityControlSheetMapper;
 

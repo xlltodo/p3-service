@@ -58,7 +58,7 @@ public class QualityControlSheetController {
 
     @Operation(summary = "保存并提交")
     @PostMapping("/submit")
-    public ApiResponse<Boolean> submit(@Validated @RequestBody QualityControlSheetCommand command) {
+    public ApiResponse<String> submit(@Validated @RequestBody QualityControlSheetCommand command) {
 
         return ApiResponse.success(qualityControlSheetCommandHandler.submit(command));
     }

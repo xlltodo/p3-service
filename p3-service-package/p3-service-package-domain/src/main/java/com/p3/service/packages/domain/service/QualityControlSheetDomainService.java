@@ -14,9 +14,6 @@ public class QualityControlSheetDomainService {
     private IQualityControlSheetRepository packageQualityControlSheetRepository;
 
     @Resource
-    private IQualityControlSheetRepository packageQualityControlSheetARepository;
-
-    @Resource
     private ISyncInProcessEventPublisher syncInProcessEventPublisher;
 
     @Resource

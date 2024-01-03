@@ -8,6 +8,8 @@ public interface IPackageProcessedRecordRepository {
 
 
     PackageProcessedRecord save(PackageProcessedRecord packageProcessedRecord);
+
+    PackageProcessedRecord getByExpressBillNumber(String expressBillNumber);
 }
 
 
