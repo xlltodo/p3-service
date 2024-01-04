@@ -10,15 +10,13 @@ import com.p3.service.packages.infrastructure.repository.entity.PackageMainInfoE
 import com.p3.service.packages.infrastructure.repository.entity.PackageServiceItemEntity;
 import com.p3.service.packages.infrastructure.repository.entity.PackageSpatialAttributeEntity;
 import com.p3.service.packages.infrastructure.repository.entity.PackageTrackingNumberEntity;
-import com.p3.service.packages.infrastructure.repository.mapper.PackageMainInfoMapper;
-import com.p3.service.packages.infrastructure.repository.mapper.PackageServiceItemMapper;
-import com.p3.service.packages.infrastructure.repository.mapper.PackageSpatialAttributeMapper;
-import com.p3.service.packages.infrastructure.repository.mapper.PackageTrackingNumberMapper;
+import com.p3.service.packages.infrastructure.repository.mapper.*;
 import jakarta.annotation.Resource;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public class PackageMainInfoRepositoryImpl implements IPackageMainInfoRepository {
@@ -31,6 +29,8 @@ public class PackageMainInfoRepositoryImpl implements IPackageMainInfoRepository
     private PackageSpatialAttributeMapper packageSpatialAttributeMapper;
     @Resource
     private PackageServiceItemMapper packageServiceItemMapper;
+    @Resource
+    private PackageGoodsInfoMapper packageGoodsInfoMapper;
 
     @Override
     public PackageMainInfo info(String cxNumber) {
@@ -54,6 +54,18 @@ public class PackageMainInfoRepositoryImpl implements IPackageMainInfoRepository
 
         PackageMainInfoEntity packageMainInfoEntity = PackageMainInfoConvertor.convertToDataEntity(packageMainInfo);
         if(packageMainInfoMapper.insert(packageMainInfoEntity) > 0) {
+
+            Optional.ofNullable(PackageMainInfoConvertor.convertToPackageTrackingNumberDataEntities(packageMainInfo.getTrackingNumbers()))
+                    .ifPresent(list -> list.forEach(packageTrackingNumberMapper::insert));
+
+            Optional.ofNullable(PackageMainInfoConvertor.convertToPackageServiceItemDataEntities(packageMainInfo.getServiceItems()))
+                    .ifPresent(list -> list.forEach(packageServiceItemMapper::insert));
+
+            Optional.ofNullable(PackageMainInfoConvertor.convertToPackageSpatialAttributeDataEntities(packageMainInfo.getSpatialAttributes()))
+                    .ifPresent(list -> list.forEach(packageSpatialAttributeMapper::insert));
+
+            Optional.ofNullable(PackageMainInfoConvertor.convertToPackageGoodsInfoDataEntities(packageMainInfo.getGoodsInfos()))
+                    .ifPresent(list -> list.forEach(packageGoodsInfoMapper::insert));
 
             return packageMainInfoEntity.getId();
         }

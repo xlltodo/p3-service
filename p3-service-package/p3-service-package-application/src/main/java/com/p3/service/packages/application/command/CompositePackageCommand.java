@@ -8,28 +8,31 @@ import java.io.Serializable;
 import java.util.List;
 
 @Data
-public class CompositePackageMainInfoCommand implements Serializable {
+public class CompositePackageCommand implements Serializable {
 
     @Serial
     private static final long serialVersionUID = -2202851153206492142L;
 
     @Schema(description = "集包方式（一包一集：ONE_PACKAGE、多包一集：MULTIPLE_PACKAGES）")
-    private String packagingMethod;
+    private String compositeMethod;
 
-    @Schema(description = "集包类型")
+    @Schema(description = "包装类型")
     private String packagingType;
 
-    @Schema(description = "集包重量")
-    private double weight;
+    @Schema(description = "重量")
+    private Double weight;
+
+    @Schema(description = "体积")
+    private Double volume;
 
     @Schema(description = "长")
-    private double length;
+    private Double length;
 
     @Schema(description = "宽")
-    private double width;
+    private Double width;
 
     @Schema(description = "高")
-    private double height;
+    private Double height;
 
     @Schema(description = "一级货品类型")
     private String primaryGoodsType;
@@ -43,6 +46,6 @@ public class CompositePackageMainInfoCommand implements Serializable {
     @Schema(description = "运输方式")
     private String shippingMethod;
 
-    @Schema(description = "箱子集合（CX号 箱子编号）")
-    private List<String> boxes;
+    @Schema(description = "箱子集合（包裹编号packageCode，不是cx编号）")
+    private List<String> packageCodes;
 }

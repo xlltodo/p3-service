@@ -23,7 +23,7 @@ public class PackageTrackingNumber {
      * 单号类型
      */
     @TableField(value = "number_type")
-    private String numberType;
+    private PackageTrackingNumberTypeEnum numberType;
 
     /**
      * 单号
@@ -40,13 +40,30 @@ public class PackageTrackingNumber {
     public PackageTrackingNumber(String id, String packageCode, String numberType, String trackingNumber, LocalDateTime creationTime) {
         this.id = id;
         this.packageCode = packageCode;
-        this.numberType = numberType;
+        this.numberType = PackageTrackingNumberTypeEnum.valueOf(numberType);
+        this.trackingNumber = trackingNumber;
+        this.creationTime = creationTime;
+    }
+
+    public PackageTrackingNumber(String id, String packageCode, PackageTrackingNumberTypeEnum numberTypeEnum, String trackingNumber, LocalDateTime creationTime) {
+        this.id = id;
+        this.packageCode = packageCode;
+        this.numberType = numberTypeEnum;
         this.trackingNumber = trackingNumber;
         this.creationTime = creationTime;
     }
 
     public <T> T mapWith(PackageTrackingNumberMapper<T> mapper) {
         return mapper.map(this.id, this.packageCode, this.numberType, this.trackingNumber, this.creationTime);
+    }
+
+    public boolean checkWithType(PackageTrackingNumberTypeEnum numberType) {
+
+        return this.numberType.equals(numberType);
+    }
+
+    public String getTrackingNumber() {
+        return this.trackingNumber;
     }
 
 }

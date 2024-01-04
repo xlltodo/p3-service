@@ -2,8 +2,10 @@ package com.p3.service.packages.application.result;
 
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.p3.service.packages.domain.model.entity.PackageTrackingNumberTypeEnum;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
+import lombok.experimental.Accessors;
 
 import java.io.Serial;
 import java.io.Serializable;
@@ -14,6 +16,7 @@ import java.time.LocalDateTime;
  * @TableName package_tracking_number
  */
 @Data
+@Accessors(chain = true)
 @TableName(value ="package_tracking_number")
 public class PackageTrackingNumberResult implements Serializable {
 
@@ -30,7 +33,7 @@ public class PackageTrackingNumberResult implements Serializable {
 
     @Schema(description = "单号类型")
     @TableField(value = "number_type")
-    private String numberType;
+    private PackageTrackingNumberTypeEnum numberType;
 
     @Schema(description = "单号")
     @TableField(value = "tracking_number")

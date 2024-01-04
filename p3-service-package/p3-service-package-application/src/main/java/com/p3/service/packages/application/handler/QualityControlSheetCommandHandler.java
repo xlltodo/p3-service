@@ -60,6 +60,6 @@ public class QualityControlSheetCommandHandler {
 
         QualityControlSheet qualityControlSheet = this.save(command);
         qualityControlSheet.submitQualityControlSheet("", "");
-        return qualityControlSheetDomainService.submit(qualityControlSheet) ? qualityControlSheet.getExpressBillNumber() : null;
+        return qualityControlSheetDomainService.submit(qualityControlSheet) ? qualityControlSheet.getUniqueIdentifier() : null;
     }
 }

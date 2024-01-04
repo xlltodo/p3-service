@@ -5,5 +5,5 @@ import java.time.LocalDateTime;
 
 public interface PackageServiceItemMapper<T> {
 
-    T map(String id, String serviceType, String serviceName, BigDecimal fee, Integer activated, LocalDateTime creationTime);
+    T map(String id, String packageCode, String serviceType, String serviceName, BigDecimal fee, Integer activated, LocalDateTime creationTime);
 }

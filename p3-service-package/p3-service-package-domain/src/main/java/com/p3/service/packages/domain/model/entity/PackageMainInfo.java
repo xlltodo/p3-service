@@ -4,6 +4,7 @@ import com.p3.service.packages.domain.model.mapper.PackageMainInfoMapper;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Optional;
 
 public class PackageMainInfo {
 
@@ -131,4 +132,29 @@ public class PackageMainInfo {
                 this.composited, this.shippingMethod);
     }
 
+    public String getPackageCode() {
+        return this.packageCode;
+    }
+
+    public String getTrackingNumber(PackageTrackingNumberTypeEnum numberTypeEnum) {
+
+        return Optional.ofNullable(this.trackingNumbers).flatMap(trackingNumbers -> trackingNumbers.stream().filter(trackingNumber ->
+                trackingNumber.checkWithType(numberTypeEnum)).findFirst().map(PackageTrackingNumber::getTrackingNumber)).orElse(null);
+    }
+
+    public List<PackageTrackingNumber> getTrackingNumbers() {
+        return this.trackingNumbers;
+    }
+
+    public List<PackageServiceItem> getServiceItems() {
+        return this.serviceItems;
+    }
+
+    public List<PackageSpatialAttribute> getSpatialAttributes() {
+        return this.spatialAttributes;
+    }
+
+    public List<PackageGoodsInfo> getGoodsInfos() {
+        return this.goodsInfos;
+    }
 }

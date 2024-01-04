@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
+import lombok.experimental.Accessors;
 
 import java.io.Serial;
 import java.io.Serializable;
@@ -15,6 +16,7 @@ import java.time.LocalDateTime;
  * @TableName package_spatial_attributes
  */
 @Data
+@Accessors(chain = true)
 @TableName(value ="package_spatial_attributes")
 public class PackageSpatialAttributesResult implements Serializable {
 

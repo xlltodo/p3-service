@@ -23,13 +23,13 @@ public class PackageMainInfoResult implements Serializable {
     private String packageCode;
 
     @Schema(description = "追踪单号")
-    private List<PackageTrackingNumberResult> trackingNumber;
+    private List<PackageTrackingNumberResult> trackingNumbers;
 
     @Schema(description = "空间属性")
     private List<PackageSpatialAttributesResult> spatialAttributes;
 
     @Schema(description = "服务信息")
-    private List<PackageServiceItemResult> serviceItems;
+    private List<PackageServiceItemResult> services;
 
     @Schema(description = "所属客户编号")
     private String customerCode;
@@ -71,6 +71,6 @@ public class PackageMainInfoResult implements Serializable {
     private String shippingMethod;
 
     @Schema(description = "包裹商品")
-    private List<PackageGoodsInfoResult> goodsInfo;
+    private List<PackageGoodsInfoResult> goodsInfos;
 
 }

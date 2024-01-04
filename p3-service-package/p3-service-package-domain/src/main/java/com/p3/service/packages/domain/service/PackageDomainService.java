@@ -1,10 +1,7 @@
 package com.p3.service.packages.domain.service;
 
 import com.p3.service.packages.domain.event.QualityControlSheetSubmitDomainEvent;
-import com.p3.service.packages.domain.model.entity.PackageMainInfo;
-import com.p3.service.packages.domain.model.entity.PackageServiceItem;
-import com.p3.service.packages.domain.model.entity.PackageSpatialAttribute;
-import com.p3.service.packages.domain.model.entity.PackageTrackingNumber;
+import com.p3.service.packages.domain.model.entity.*;
 import com.p3.service.packages.domain.model.factory.PackageMainInfoFactory;
 import com.p3.service.packages.domain.model.factory.PackageServiceItemFactory;
 import com.p3.service.packages.domain.model.factory.PackageSpatialAttributeFactory;
@@ -38,11 +35,11 @@ public class PackageDomainService {
 
             // 编号
             String packageCode = identityGenerator.generateSnowflakeId();
-            PackageTrackingNumber packageNumber = PackageTrackingNumberFactory.create(null, packageCode, "PACKAGE_NUMBER",
+            PackageTrackingNumber packageNumber = PackageTrackingNumberFactory.create(null, packageCode, PackageTrackingNumberTypeEnum.PACKAGE_CODE,
                     packageCode, localDateTime);
-            PackageTrackingNumber cxNumber = PackageTrackingNumberFactory.create(null, packageCode, "CX_NUMBER",
-                    identityGenerator.generateCxNumber(), localDateTime);
-            PackageTrackingNumber expressBillNumber = PackageTrackingNumberFactory.create(null, packageCode, "EXPRESS_NUMBER",
+            PackageTrackingNumber cxNumber = PackageTrackingNumberFactory.create(null, packageCode, PackageTrackingNumberTypeEnum.CX_NUMBER,
+                    identityGenerator.generatePackageTrackingNumber(PackageTrackingNumberTypeEnum.CX_NUMBER), localDateTime);
+            PackageTrackingNumber expressBillNumber = PackageTrackingNumberFactory.create(null, packageCode, PackageTrackingNumberTypeEnum.EXPRESS_NUMBER,
                     event.getExpressBillNumber(), localDateTime);
             List<PackageTrackingNumber> packageTrackingNumbers = new ArrayList<>(3);
             packageTrackingNumbers.add(packageNumber);

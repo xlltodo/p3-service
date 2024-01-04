@@ -54,7 +54,7 @@ public class PackageServiceItem {
     }
 
     public <T> T mapWith(PackageServiceItemMapper<T> mapper) {
-        return mapper.map(this.id, this.serviceType, this.serviceName, this.fee, this.activated, this.creationTime);
+        return mapper.map(this.id,this.packageCode, this.serviceType, this.serviceName, this.fee, this.activated, this.creationTime);
     }
 
 }

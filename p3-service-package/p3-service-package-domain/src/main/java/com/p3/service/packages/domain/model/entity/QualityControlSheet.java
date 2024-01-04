@@ -208,6 +208,10 @@ public class QualityControlSheet {
         return this.id;
     }
 
+    public String getTrackingNumber(PackageTrackingNumberTypeEnum trackingNumberTypeEnum) {
+        return this.id;
+    }
+
     public String getExpressBillNumber() {
         return this.expressBillNumber;
     }
