@@ -47,6 +47,8 @@ public class QualityControlSheetAssembler {
                 null,
                 forecastExpress.getRemark(),
                 null,
+                forecastExpress.getTypeOfShipping(),
+                forecastExpress.getTypeOfShipping(),
                 null,
                 null,
                 null,
@@ -61,8 +63,8 @@ public class QualityControlSheetAssembler {
                                             expectedPackageCount, actualPackageCount, expectedProductCount, actualProductCount,
                                             totalProductValue, warehouseCode, warehouseName, destinationRegionCode,
                                             destinationRegionName, expressCompanyCode, expressCompanyName, exceptional,
-                                            itemImage, originalProductRemarks, packageStatus, inspectorId,
-                                            inspectorName, inspectionTime, goodsInfos) -> new QualityControlSheetResult()
+                                            itemImage, originalProductRemarks, packageStatus, transportMethodCode, transportMethodName,
+                                            inspectorId, inspectorName, inspectionTime, goodsInfos) -> new QualityControlSheetResult()
                 .setId(id)
                 .setExpressBillNumber(expressBillNumber)
                 .setPackages(Optional.ofNullable(packages).map(QualityControlSheetPackageAssembler::toResults).orElse(null))
@@ -88,6 +90,8 @@ public class QualityControlSheetAssembler {
                 .setExceptional(exceptional)
                 .setItemImage(itemImage)
                 .setPackageStatus(packageStatus)
+                .setTransportMethodCode(transportMethodCode)
+                .setTransportMethodName(transportMethodName)
                 .setInspectorId(inspectorId)
                 .setInspectorName(inspectorName)
                 .setInspectionTime(inspectionTime)

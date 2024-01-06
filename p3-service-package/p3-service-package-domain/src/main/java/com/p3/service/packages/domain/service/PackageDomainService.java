@@ -2,10 +2,7 @@ package com.p3.service.packages.domain.service;
 
 import com.p3.service.packages.domain.event.QualityControlSheetSubmitDomainEvent;
 import com.p3.service.packages.domain.model.entity.*;
-import com.p3.service.packages.domain.model.factory.PackageMainInfoFactory;
-import com.p3.service.packages.domain.model.factory.PackageServiceItemFactory;
-import com.p3.service.packages.domain.model.factory.PackageSpatialAttributeFactory;
-import com.p3.service.packages.domain.model.factory.PackageTrackingNumberFactory;
+import com.p3.service.packages.domain.model.factory.*;
 import com.p3.service.packages.domain.repository.IPackageMainInfoRepository;
 import com.p3.service.packages.domain.service.common.IIdentityGenerator;
 import jakarta.annotation.Resource;
@@ -53,6 +50,14 @@ public class PackageDomainService {
             List<PackageSpatialAttribute> packageSpatialAttributes = new ArrayList<>(1);
             packageSpatialAttributes.add(packageSpatialAttribute);
 
+            // 商品
+            List<PackageGoodsInfo> goodsInfos = Optional.ofNullable(event.getGoods()).map(list -> list.stream().map(goods ->
+                                    PackageGoodsInfoFactory.create(null, packageCode, goods.getProductName(), goods.getGoodsName(), goods.getGoodsType(),
+                                            goods.getSpecification(), goods.getShipmentQuantity(), goods.getUnitPrice(), goods.getTotalPrice(), goods.getImageUrl()))
+                            .collect(Collectors.toList()))
+                    .orElse(null);
+
+
             // 服务信息
             List<PackageServiceItem> packageServiceItems = Optional.ofNullable(event.getServices()).map(services -> services.stream().map(service -> PackageServiceItemFactory.create(null, packageCode, service.getServiceType(), service.getServiceName(), service.getFee(), service.getActivated(), LocalDateTime.now())).collect(Collectors.toList())).orElse(null);
 
@@ -60,7 +65,7 @@ public class PackageDomainService {
                     event.getCustomerCode(), event.getCustomerLevel(), event.getCustomerNickname(), event.getCustomerType(),
                     event.getThirdPartyCustomerCode(), event.getThirdPartyCustomerLevel(), event.getWarehouseCode(),
                     event.getDestinationRegionCode(), p.getPrimaryGoodsType(), p.getSecondaryGoodsType(),
-                    null, false, "");
+                    event.getTotalProductValue(), event.getTransportMethodCode(), event.getTransportMethodName(), PackageStatusEnum.ORIGIN_WAREHOUSE_RECEIVED, false, goodsInfos);
         }).collect(Collectors.toList());
 
         packageMainInfoRepository.createBatch(packageMainInfos);

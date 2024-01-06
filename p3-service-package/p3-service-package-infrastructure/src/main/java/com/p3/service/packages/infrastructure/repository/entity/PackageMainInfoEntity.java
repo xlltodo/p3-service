@@ -101,15 +101,27 @@ public class PackageMainInfoEntity implements Serializable {
     private BigDecimal goodsValue;
 
     /**
-     * 集包标识
+     * 运输方式
      */
-    @TableField(value = "composited")
-    private Boolean composited;
+    @TableField(value = "transport_method_code")
+    private String transportMethodCode;
 
     /**
      * 运输方式
      */
-    @TableField(value = "shipping_method")
-    private String shippingMethod;
+    @TableField(value = "transport_method_name")
+    private String transportMethodName;
+
+    /**
+     * 包裹状态
+     */
+    @TableField(value = "package_status")
+    private String packageStatus;
+
+    /**
+     * 集包标识
+     */
+    @TableField(value = "composited")
+    private Boolean composited;
 
 }

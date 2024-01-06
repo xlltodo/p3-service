@@ -22,7 +22,7 @@ public class QualityControlSheetPackageRepository implements IQualityControlShee
     public Boolean cleanBySheetId(String sheetId) {
 
         qualityControlSheetPackageMapper.delete(Wrappers.lambdaQuery(QualityControlSheetPackageEntity.class).eq(QualityControlSheetPackageEntity::getSheetId, sheetId));
-        return null;
+        return true;
     }
 
     @Override

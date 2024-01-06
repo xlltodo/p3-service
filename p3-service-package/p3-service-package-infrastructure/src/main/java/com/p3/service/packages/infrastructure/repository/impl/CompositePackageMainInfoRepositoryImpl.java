@@ -30,7 +30,7 @@ public class CompositePackageMainInfoRepositoryImpl implements ICompositePackage
     private CompositePackageAssociationMapper compositePackageAssociationMapper;
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public String createCompositePackage(CompositePackageMainInfo compositePackageMainInfo) {
+    public CompositePackageMainInfo createCompositePackage(CompositePackageMainInfo compositePackageMainInfo) {
 
         List<CompositePackageTrackingNumberEntity> trackingNumberEntities = CompositePackageMainInfoConvertor.convertToTrackingNumberDataEntities(compositePackageMainInfo.getTrackingNumbers());
         Optional.ofNullable(trackingNumberEntities).ifPresent(list -> list.forEach(compositePackageTrackingNumberMapper::insert));
@@ -41,6 +41,6 @@ public class CompositePackageMainInfoRepositoryImpl implements ICompositePackage
         List<CompositePackageAssociationEntity> associationEntities = CompositePackageMainInfoConvertor.convertToAssociationDataEntities(compositePackageMainInfo.getPackageAssociations());
         Optional.ofNullable(associationEntities).ifPresent(list -> list.forEach(compositePackageAssociationMapper::insert));
 
-        return compositePackageMainInfoMapper.insert(CompositePackageMainInfoConvertor.convertToDataEntity(compositePackageMainInfo)) > 0 ? compositePackageMainInfo.getCompositePackageCode() : null;
+        return compositePackageMainInfoMapper.insert(CompositePackageMainInfoConvertor.convertToDataEntity(compositePackageMainInfo)) > 0 ? compositePackageMainInfo : null;
     }
 }

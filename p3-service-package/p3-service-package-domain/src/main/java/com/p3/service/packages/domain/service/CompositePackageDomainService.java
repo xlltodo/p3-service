@@ -15,7 +15,7 @@ public class CompositePackageDomainService {
     @Resource
     private CompositePackageTrackingNumberDomainService compositePackageTrackingNumberDomainService;
 
-    public String createCompositePackage(CompositePackageMainInfo compositePackageMainInfo) {
+    public CompositePackageMainInfo createCompositePackage(CompositePackageMainInfo compositePackageMainInfo) {
 
         CompositePackageTrackingNumber trackingNumber = compositePackageTrackingNumberDomainService.createTrackingNumber(compositePackageMainInfo.getCompositePackageCode(), CompositePackageTrackingNumberTypeEnum.CJM_NUMBER);
         compositePackageMainInfo.addTrackingNumber(trackingNumber);

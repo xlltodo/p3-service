@@ -16,8 +16,8 @@ public class CompositePackageCommand implements Serializable {
     @Schema(description = "集包方式（一包一集：ONE_PACKAGE、多包一集：MULTIPLE_PACKAGES）")
     private String compositeMethod;
 
-    @Schema(description = "包装类型")
-    private String packagingType;
+    @Schema(description = "集包包装类型")
+    private String compositePackagingType;
 
     @Schema(description = "重量")
     private Double weight;
@@ -43,8 +43,11 @@ public class CompositePackageCommand implements Serializable {
     @Schema(description = "集包标识")
     private Boolean composited;
 
-    @Schema(description = "运输方式")
-    private String shippingMethod;
+    @Schema(description = "运输方式CODE")
+    private String transportMethodCode;
+
+    @Schema(description = "运输方式名称")
+    private String transportMethodName;
 
     @Schema(description = "箱子集合（包裹编号packageCode，不是cx编号）")
     private List<String> packageCodes;

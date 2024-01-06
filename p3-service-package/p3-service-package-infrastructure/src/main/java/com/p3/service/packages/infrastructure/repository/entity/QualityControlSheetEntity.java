@@ -168,6 +168,18 @@ public class QualityControlSheetEntity implements Serializable {
     private String packageStatus;
 
     /**
+     * 运输方式CODE
+     */
+    @TableField(value = "transport_method_code")
+    private String transportMethodCode;
+
+    /**
+     * 运输方式名称
+     */
+    @TableField(value = "transport_method_name")
+    private String transportMethodName;
+
+    /**
      * 质检员ID
      */
     @TableField(value = "inspector_id")

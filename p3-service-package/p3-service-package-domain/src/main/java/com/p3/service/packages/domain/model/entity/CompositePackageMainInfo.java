@@ -1,6 +1,7 @@
 package com.p3.service.packages.domain.model.entity;
 
 import com.p3.service.packages.domain.model.mapper.CompositePackageMainInfoMapper;
+import com.p3.service.packages.domain.model.mapper.CompositePackageOrderInfoMapper;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,9 +35,14 @@ public class CompositePackageMainInfo {
     private String compositePackagingType;
 
     /**
-     * 运输方式
+     * 运输方式CODE
      */
-    private String transportMethod;
+    private String transportMethodCode;
+
+    /**
+     * 运输方式名称
+     */
+    private String transportMethodName;
 
     /**
      * 一级货品类型
@@ -63,13 +69,14 @@ public class CompositePackageMainInfo {
      */
     private List<CompositePackageAssociation> packageAssociations;
 
-    public CompositePackageMainInfo(String id, String compositePackageCode, String compositeMethod, Integer compositeQuantity, String compositePackagingType, String transportMethod, String primaryGoodsType, String secondaryGoodsType, List<CompositePackageTrackingNumber> trackingNumbers, List<CompositePackageSpatialAttribute> spatialAttributes, List<CompositePackageAssociation> packageAssociations) {
+    public CompositePackageMainInfo(String id, String compositePackageCode, String compositeMethod, Integer compositeQuantity, String compositePackagingType, String transportMethodCode, String transportMethodName, String primaryGoodsType, String secondaryGoodsType, List<CompositePackageTrackingNumber> trackingNumbers, List<CompositePackageSpatialAttribute> spatialAttributes, List<CompositePackageAssociation> packageAssociations) {
         this.id = id;
         this.compositePackageCode = compositePackageCode;
         this.compositeMethod = compositeMethod;
         this.compositeQuantity = compositeQuantity;
         this.compositePackagingType = compositePackagingType;
-        this.transportMethod = transportMethod;
+        this.transportMethodCode = transportMethodCode;
+        this.transportMethodName = transportMethodName;
         this.primaryGoodsType = primaryGoodsType;
         this.secondaryGoodsType = secondaryGoodsType;
         this.trackingNumbers = Optional.ofNullable(trackingNumbers).orElse(new ArrayList<>());
@@ -78,12 +85,16 @@ public class CompositePackageMainInfo {
     }
 
     public <T> T mapWith(CompositePackageMainInfoMapper<T> mapper) {
-        return mapper.map(this.id, this.compositePackageCode, this.compositeMethod, this.compositeQuantity, this.compositePackagingType, this.transportMethod, this.primaryGoodsType, this.secondaryGoodsType, this.packageAssociations);
+        return mapper.map(this.id, this.compositePackageCode, this.compositeMethod, this.compositeQuantity, this.compositePackagingType, this.transportMethodCode, this.transportMethodName, this.primaryGoodsType, this.secondaryGoodsType, this.packageAssociations);
     }
 
     public String addTrackingNumber(CompositePackageTrackingNumber trackingNumber) {
         this.trackingNumbers.add(trackingNumber);
         return trackingNumber.getTrackingNumber();
+    }
+
+    public String getTrackingNumber(CompositePackageTrackingNumberTypeEnum trackingNumberTypeEnum) {
+        return this.trackingNumbers.stream().filter(trackingNumber -> trackingNumberTypeEnum.equals(trackingNumber.getNumberType())).findFirst().map(CompositePackageTrackingNumber::getTrackingNumber).orElse(null);
     }
 
     public String getCompositePackageCode() {
@@ -100,5 +111,9 @@ public class CompositePackageMainInfo {
 
     public List<CompositePackageAssociation> getPackageAssociations() {
         return this.packageAssociations;
+    }
+
+    public <T> T getOrderInfo(CompositePackageOrderInfoMapper<T> mapper) {
+        return mapper.map(this.getTrackingNumber(CompositePackageTrackingNumberTypeEnum.CJM_NUMBER), this.transportMethodCode, this.primaryGoodsType, this.secondaryGoodsType);
     }
 }

@@ -96,6 +96,12 @@ public class QualityControlSheetResult implements Serializable {
     @Schema(description = "包裹状态（预留字段）")
     private String packageStatus;
 
+    @Schema(description = "运输方式CODE")
+    private String transportMethodCode;
+
+    @Schema(description = "运输方式名称")
+    private String transportMethodName;
+
     @Schema(description = "质检员ID")
     private String inspectorId;
 

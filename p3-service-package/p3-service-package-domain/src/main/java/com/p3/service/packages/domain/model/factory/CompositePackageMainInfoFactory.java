@@ -9,7 +9,7 @@ import java.util.List;
 
 public class CompositePackageMainInfoFactory {
 
-    public static CompositePackageMainInfo create(String id, String compositePackageCode, String compositeMethod, Integer compositeQuantity, String compositePackagingType, String transportMethod, String primaryGoodsType, String secondaryGoodsType, List<CompositePackageTrackingNumber> trackingNumbers, List<CompositePackageSpatialAttribute> spatialAttributes, List<CompositePackageAssociation> packageAssociations) {
-        return new CompositePackageMainInfo(id, compositePackageCode, compositeMethod, compositeQuantity, compositePackagingType, transportMethod, primaryGoodsType, secondaryGoodsType, trackingNumbers, spatialAttributes, packageAssociations);
+    public static CompositePackageMainInfo create(String id, String compositePackageCode, String compositeMethod, Integer compositeQuantity, String compositePackagingType, String transportMethodCode, String transportMethodName, String primaryGoodsType, String secondaryGoodsType, List<CompositePackageTrackingNumber> trackingNumbers, List<CompositePackageSpatialAttribute> spatialAttributes, List<CompositePackageAssociation> packageAssociations) {
+        return new CompositePackageMainInfo(id, compositePackageCode, compositeMethod, compositeQuantity, compositePackagingType, transportMethodCode, transportMethodName, primaryGoodsType, secondaryGoodsType, trackingNumbers, spatialAttributes, packageAssociations);
     }
 }

@@ -141,6 +141,16 @@ public class QualityControlSheet {
     private String packageStatus;
 
     /**
+     * 运输方式CODE
+     */
+    private String transportMethodCode;
+
+    /**
+     * 运输方式名称
+     */
+    private String transportMethodName;
+
+    /**
      * 质检员ID
      */
     private String inspectorId;
@@ -160,7 +170,7 @@ public class QualityControlSheet {
      */
     private List<QualityControlSheetGoodsInfo> goodsInfos;
 
-    public QualityControlSheet(String id, String expressBillNumber, List<QualityControlSheetPackage> packages, List<QualityControlSheetServiceItem> services, String customerCode, String customerNickname, String customerLevel, String customerType, String thirdPartyCustomerCode, String thirdPartyCustomerLevel, String storageLocation, Integer expectedPackageCount, Integer actualPackageCount, Integer expectedProductCount, Integer actualProductCount, BigDecimal totalProductValue, String warehouseCode, String warehouseName, String destinationRegionCode, String destinationRegionName, String expressCompanyCode, String expressCompanyName, Boolean exceptional, String itemImage, String originalProductRemarks, String packageStatus, String inspectorId, String inspectorName, LocalDateTime inspectionTime, List<QualityControlSheetGoodsInfo> goodsInfos) {
+    public QualityControlSheet(String id, String expressBillNumber, List<QualityControlSheetPackage> packages, List<QualityControlSheetServiceItem> services, String customerCode, String customerNickname, String customerLevel, String customerType, String thirdPartyCustomerCode, String thirdPartyCustomerLevel, String storageLocation, Integer expectedPackageCount, Integer actualPackageCount, Integer expectedProductCount, Integer actualProductCount, BigDecimal totalProductValue, String warehouseCode, String warehouseName, String destinationRegionCode, String destinationRegionName, String expressCompanyCode, String expressCompanyName, Boolean exceptional, String itemImage, String originalProductRemarks, String packageStatus, String transportMethodCode, String transportMethodName, String inspectorId, String inspectorName, LocalDateTime inspectionTime, List<QualityControlSheetGoodsInfo> goodsInfos) {
         this.id = id;
         this.expressBillNumber = expressBillNumber;
         this.packages = packages;
@@ -187,6 +197,8 @@ public class QualityControlSheet {
         this.itemImage = itemImage;
         this.originalProductRemarks = originalProductRemarks;
         this.packageStatus = packageStatus;
+        this.transportMethodCode = transportMethodCode;
+        this.transportMethodName = transportMethodName;
         this.inspectorId = inspectorId;
         this.inspectorName = inspectorName;
         this.inspectionTime = inspectionTime;
@@ -200,8 +212,8 @@ public class QualityControlSheet {
                 this.expectedPackageCount, this.actualPackageCount, this.expectedProductCount, this.actualProductCount,
                 this.totalProductValue, this.warehouseCode, this.warehouseName, this.destinationRegionCode,
                 this.destinationRegionName, this.expressCompanyCode, this.expressCompanyName, this.exceptional,
-                this.itemImage, this.originalProductRemarks, this.packageStatus, this.inspectorId,
-                this.inspectorName, this.inspectionTime, this.goodsInfos);
+                this.itemImage, this.originalProductRemarks, this.packageStatus, this.transportMethodCode, this.transportMethodName,
+                this.inspectorId, this.inspectorName, this.inspectionTime, this.goodsInfos);
     }
 
     public String getUniqueIdentifier() {
@@ -251,6 +263,8 @@ public class QualityControlSheet {
                 .setExpressCompanyCode(this.expressCompanyCode)
                 .setExpressCompanyName(this.expressCompanyName)
                 .setPackageStatus(this.packageStatus)
+                .setTransportMethodCode(this.transportMethodCode)
+                .setTransportMethodName(this.transportMethodName)
                 .setInspectorId(this.inspectorId)
                 .setInspectorName(this.inspectorName)
                 .setInspectionTime(this.inspectionTime)

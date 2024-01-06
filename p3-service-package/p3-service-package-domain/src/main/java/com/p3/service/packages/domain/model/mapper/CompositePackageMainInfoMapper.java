@@ -6,5 +6,5 @@ import java.util.List;
 
 public interface CompositePackageMainInfoMapper<T> {
 
-    T map(String id, String compositePackageCode, String compositeMethod, Integer compositeQuantity, String compositePackagingType, String transportMethod, String primaryGoodsType, String secondaryGoodsType, List<CompositePackageAssociation> packageAssociations);
+    T map(String id, String compositePackageCode, String compositeMethod, Integer compositeQuantity, String compositePackagingType, String transportMethodCode, String transportMethodName, String primaryGoodsType, String secondaryGoodsType, List<CompositePackageAssociation> packageAssociations);
 }

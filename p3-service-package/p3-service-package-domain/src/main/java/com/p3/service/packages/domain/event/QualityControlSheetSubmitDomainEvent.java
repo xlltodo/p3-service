@@ -125,6 +125,16 @@ public class QualityControlSheetSubmitDomainEvent extends SyncInProcessBaseDomai
     private String expressCompanyName;
 
     /**
+     * 运输方式CODE
+     */
+    private String transportMethodCode;
+
+    /**
+     * 运输方式名称
+     */
+    private String transportMethodName;
+
+    /**
      * 包裹状态
      */
     private String packageStatus;
@@ -145,6 +155,11 @@ public class QualityControlSheetSubmitDomainEvent extends SyncInProcessBaseDomai
     private LocalDateTime inspectionTime;
 
     /**
+     * 质检时间
+     */
+    private List<Goods> goods;
+
+    /**
      * 原始商品备注
      */
     private String originalProductRemarks;
@@ -152,30 +167,6 @@ public class QualityControlSheetSubmitDomainEvent extends SyncInProcessBaseDomai
     public QualityControlSheetSubmitDomainEvent() {
 
         super("");
-    }
-
-    public QualityControlSheetSubmitDomainEvent(String expressBillNumber, List<Package> packages, String customerCode, String storageLocation, Integer expectedPackageCount, Integer actualPackageCount, Integer expectedProductCount, Integer actualProductCount, BigDecimal totalProductValue, String warehouseCode, String warehouseName, String destinationRegionCode, String destinationRegionName, String expressCompanyCode, String expressCompanyName, String packageStatus, String inspectorId, String inspectorName, LocalDateTime inspectionTime, String originalProductRemarks) {
-        super("");
-        this.expressBillNumber = expressBillNumber;
-        this.packages = packages;
-        this.customerCode = customerCode;
-        this.storageLocation = storageLocation;
-        this.expectedPackageCount = expectedPackageCount;
-        this.actualPackageCount = actualPackageCount;
-        this.expectedProductCount = expectedProductCount;
-        this.actualProductCount = actualProductCount;
-        this.totalProductValue = totalProductValue;
-        this.warehouseCode = warehouseCode;
-        this.warehouseName = warehouseName;
-        this.destinationRegionCode = destinationRegionCode;
-        this.destinationRegionName = destinationRegionName;
-        this.expressCompanyCode = expressCompanyCode;
-        this.expressCompanyName = expressCompanyName;
-        this.packageStatus = packageStatus;
-        this.inspectorId = inspectorId;
-        this.inspectorName = inspectorName;
-        this.inspectionTime = inspectionTime;
-        this.originalProductRemarks = originalProductRemarks;
     }
 
     @Getter
@@ -265,4 +256,54 @@ public class QualityControlSheetSubmitDomainEvent extends SyncInProcessBaseDomai
          */
         private Integer activated;
     }
+
+    @Getter
+    @Setter
+    @Accessors(chain = true)
+    public static class Goods implements Serializable {
+
+        @Serial
+        private static final long serialVersionUID = -5941047123114253352L;
+
+        /**
+         * 品名
+         */
+        private String productName;
+
+        /**
+         * 货品名称
+         */
+        private String goodsName;
+
+        /**
+         * 货物类型
+         */
+        private String goodsType;
+
+        /**
+         * 规格
+         */
+        private String specification;
+
+        /**
+         * 发货数量
+         */
+        private Integer shipmentQuantity;
+
+        /**
+         * 单价
+         */
+        private BigDecimal unitPrice;
+
+        /**
+         * 总价
+         */
+        private BigDecimal totalPrice;
+
+        /**
+         * 货品图片
+         */
+        private String imageUrl;
+    }
+
 }

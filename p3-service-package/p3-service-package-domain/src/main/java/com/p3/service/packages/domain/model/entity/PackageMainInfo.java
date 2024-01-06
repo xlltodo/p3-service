@@ -89,21 +89,31 @@ public class PackageMainInfo {
     private BigDecimal goodsValue;
 
     /**
+     * 运输方式CODE
+     */
+    private String transportMethodCode;
+
+    /**
+     * 运输方式名称
+     */
+    private String transportMethodName;
+
+    /**
      * 集包标识
      */
     private Boolean composited;
 
     /**
-     * 运输方式
+     * 包裹状态
      */
-    private String shippingMethod;
+    private PackageStatusEnum packageStatus;
 
     /**
      * 商品信息
      */
     private List<PackageGoodsInfo> goodsInfos;
 
-    public PackageMainInfo(String id, String packageCode, List<PackageTrackingNumber> trackingNumbers, List<PackageSpatialAttribute> spatialAttributes, List<PackageServiceItem> serviceItems, String customerCode, String customerNickname, String customerLevel, String customerType, String thirdPartyCustomerCode, String thirdPartyCustomerLevel, String shippingWarehouse, String destinationCountry, String primaryGoodsType, String secondaryGoodsType, BigDecimal goodsValue, Boolean composited, String shippingMethod) {
+    public PackageMainInfo(String id, String packageCode, List<PackageTrackingNumber> trackingNumbers, List<PackageSpatialAttribute> spatialAttributes, List<PackageServiceItem> serviceItems, String customerCode, String customerNickname, String customerLevel, String customerType, String thirdPartyCustomerCode, String thirdPartyCustomerLevel, String shippingWarehouse, String destinationCountry, String primaryGoodsType, String secondaryGoodsType, BigDecimal goodsValue, String transportMethodCode, String transportMethodName, PackageStatusEnum packageStatus, Boolean composited, List<PackageGoodsInfo> goodsInfos) {
         this.id = id;
         this.packageCode = packageCode;
         this.trackingNumbers = trackingNumbers;
@@ -120,16 +130,15 @@ public class PackageMainInfo {
         this.primaryGoodsType = primaryGoodsType;
         this.secondaryGoodsType = secondaryGoodsType;
         this.goodsValue = goodsValue;
+        this.transportMethodCode = transportMethodCode;
+        this.transportMethodName = transportMethodName;
+        this.packageStatus = packageStatus;
         this.composited = composited;
-        this.shippingMethod = shippingMethod;
+        this.goodsInfos = goodsInfos;
     }
 
     public <T> T mapWith(PackageMainInfoMapper<T> mapper) {
-        return mapper.map(this.id, this.packageCode, this.trackingNumbers, this.spatialAttributes, this.serviceItems,
-                this.customerCode, this.customerNickname, this.customerLevel, this.customerType,
-                this.thirdPartyCustomerCode, this.thirdPartyCustomerLevel, this.shippingWarehouse, this.destinationCountry,
-                this.primaryGoodsType, this.secondaryGoodsType, this.goodsValue,
-                this.composited, this.shippingMethod);
+        return mapper.map(this.id, this.packageCode, this.trackingNumbers, this.spatialAttributes, this.serviceItems, this.customerCode, this.customerNickname, this.customerLevel, this.customerType, this.thirdPartyCustomerCode, this.thirdPartyCustomerLevel, this.shippingWarehouse, this.destinationCountry, this.primaryGoodsType, this.secondaryGoodsType, this.goodsValue, this.transportMethodCode, this.transportMethodName, this.composited, this.packageStatus, this.goodsInfos);
     }
 
     public String getPackageCode() {

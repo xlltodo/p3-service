@@ -18,8 +18,8 @@ public class QualityControlSheetEntityConvertor {
                 expectedPackageCount, actualPackageCount, expectedProductCount, actualProductCount,
                 totalProductValue, warehouseCode, warehouseName, destinationRegionCode,
                 destinationRegionName, expressCompanyCode, expressCompanyName, exceptional,
-                itemImage, originalProductRemarks, packageStatus, inspectorId,
-                inspectorName, inspectionTime, goodsInfos) ->
+                itemImage, originalProductRemarks, packageStatus, transportMethodCode, transportMethodName,
+                inspectorId, inspectorName, inspectionTime, goodsInfos) ->
                 new QualityControlSheetEntity()
                         .setId(id)
                         .setExpressBillNumber(expressBillNumber)
@@ -42,6 +42,8 @@ public class QualityControlSheetEntityConvertor {
                         .setExpressCompanyCode(expressCompanyCode)
                         .setExpressCompanyName(expressCompanyName)
                         .setPackageStatus(packageStatus)
+                        .setTransportMethodCode(transportMethodCode)
+                        .setTransportMethodName(transportMethodName)
                         .setInspectorId(inspectorId)
                         .setInspectorName(inspectorName)
                         .setInspectionTime(inspectionTime)
@@ -49,6 +51,6 @@ public class QualityControlSheetEntityConvertor {
     }
 
     public static QualityControlSheet convertToDomainEntity(QualityControlSheetEntity entity, List<QualityControlSheetPackageEntity> packageEntities, List<QualityControlSheetServiceItemEntity> serviceItemEntities, List<QualityControlSheetGoodsInfoEntity> goodsInfoEntities) {
-        return QualityControlSheetFactory.create(entity.getId(), entity.getExpressBillNumber(), QualityControlSheetPackageEntityConvertor.convertToDomainEntities(packageEntities), QualityControlSheetServiceItemEntityConvertor.convertToDomainEntities(serviceItemEntities), entity.getCustomerCode(), entity.getCustomerNickname(), entity.getCustomerLevel(), entity.getCustomerType(), entity.getThirdPartyCustomerCode(), entity.getThirdPartyCustomerLevel(), entity.getStorageLocation(), entity.getExpectedPackageCount(), entity.getActualPackageCount(), entity.getExpectedProductCount(), entity.getActualProductCount(), entity.getTotalProductValue(), entity.getWarehouseCode(), entity.getWarehouseName(), entity.getDestinationRegionCode(), entity.getDestinationRegionName(), entity.getExpressCompanyCode(), entity.getExpressCompanyName(), entity.getExceptional(), entity.getItemImage(), entity.getOriginalProductRemarks(), entity.getPackageStatus(), entity.getInspectorId(), entity.getInspectorName(), entity.getInspectionTime(), QualityControlSheetGoodsInfoEntityConvertor.convertToDomainEntities(goodsInfoEntities));
+        return QualityControlSheetFactory.create(entity.getId(), entity.getExpressBillNumber(), QualityControlSheetPackageEntityConvertor.convertToDomainEntities(packageEntities), QualityControlSheetServiceItemEntityConvertor.convertToDomainEntities(serviceItemEntities), entity.getCustomerCode(), entity.getCustomerNickname(), entity.getCustomerLevel(), entity.getCustomerType(), entity.getThirdPartyCustomerCode(), entity.getThirdPartyCustomerLevel(), entity.getStorageLocation(), entity.getExpectedPackageCount(), entity.getActualPackageCount(), entity.getExpectedProductCount(), entity.getActualProductCount(), entity.getTotalProductValue(), entity.getWarehouseCode(), entity.getWarehouseName(), entity.getDestinationRegionCode(), entity.getDestinationRegionName(), entity.getExpressCompanyCode(), entity.getExpressCompanyName(), entity.getExceptional(), entity.getItemImage(), entity.getOriginalProductRemarks(), entity.getPackageStatus(), entity.getTransportMethodCode(), entity.getTransportMethodName(), entity.getInspectorId(), entity.getInspectorName(), entity.getInspectionTime(), QualityControlSheetGoodsInfoEntityConvertor.convertToDomainEntities(goodsInfoEntities));
     }
 }

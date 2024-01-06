@@ -1,14 +1,8 @@
 package com.p3.service.packages.infrastructure.client;
 
-import com.p3.service.packages.infrastructure.client.dto.CustomerInfoDTO;
-import com.p3.service.packages.infrastructure.client.dto.ForecastExpressDTO;
-import com.p3.service.packages.infrastructure.client.dto.ForecastExpressReceiptDTO;
-import com.p3.service.packages.infrastructure.client.dto.P3ApiResult;
+import com.p3.service.packages.infrastructure.client.dto.*;
 import org.springframework.cloud.openfeign.FeignClient;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -23,4 +17,7 @@ public interface P3WmsClient {
 
     @GetMapping("/internal/customer/get")
     P3ApiResult<CustomerInfoDTO> getCustomerInfo(@RequestParam(value = "masterCustomerCode") String customerCode, @RequestParam(value = "thirdPartyCustomerCode") String thirdPartyCustomerCode);
+
+    @PostMapping("/web/user/info")
+    P3ApiResult<LoginUserInfoDTO> loginUserInfo();
 }

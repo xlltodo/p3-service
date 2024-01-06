@@ -6,6 +6,7 @@ import com.p3.service.packages.application.command.CompositePackageCommand;
 import com.p3.service.packages.application.command.CompositePackageRejectCommand;
 import com.p3.service.packages.application.handler.CompositePackageCommandHandler;
 import com.p3.service.packages.application.result.CompositePackageInfoResult;
+import com.p3.service.packages.application.result.CompositePackageOrderInfoResult;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.annotation.Resource;
@@ -23,7 +24,7 @@ public class CompositePackageController {
 
     @Operation(summary = "保存集包")
     @PostMapping("/")
-    public ApiResponse<String> save(@RequestBody CompositePackageCommand command) {
+    public ApiResponse<CompositePackageOrderInfoResult> save(@RequestBody CompositePackageCommand command) {
 
         return ApiResponse.success(compositePackageCommandHandler.createCompositePackage(command));
     }

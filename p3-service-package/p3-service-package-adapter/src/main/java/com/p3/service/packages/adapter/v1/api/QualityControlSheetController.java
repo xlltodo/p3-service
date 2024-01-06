@@ -15,6 +15,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
@@ -58,7 +59,7 @@ public class QualityControlSheetController {
 
     @Operation(summary = "保存并提交")
     @PostMapping("/submit")
-    public ApiResponse<String> submit(@Validated @RequestBody QualityControlSheetCommand command) {
+    public ApiResponse<List<String>> submit(@Validated @RequestBody QualityControlSheetCommand command) {
 
         return ApiResponse.success(qualityControlSheetCommandHandler.submit(command));
     }

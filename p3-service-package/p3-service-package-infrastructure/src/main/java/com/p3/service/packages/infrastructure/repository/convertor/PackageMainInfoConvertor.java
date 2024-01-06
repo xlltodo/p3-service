@@ -1,6 +1,10 @@
 package com.p3.service.packages.infrastructure.repository.convertor;
 
 import com.p3.service.packages.domain.model.entity.*;
+import com.p3.service.packages.domain.model.factory.PackageGoodsInfoFactory;
+import com.p3.service.packages.domain.model.factory.PackageMainInfoFactory;
+import com.p3.service.packages.domain.model.factory.PackageServiceItemFactory;
+import com.p3.service.packages.domain.model.factory.PackageSpatialAttributeFactory;
 import com.p3.service.packages.infrastructure.repository.entity.*;
 
 import java.util.List;
@@ -11,7 +15,7 @@ public class PackageMainInfoConvertor {
 
     public static PackageMainInfoEntity convertToDataEntity(PackageMainInfo mainInfo) {
 
-        return mainInfo.mapWith((id, packageCode, trackingNumbers, attributes, serviceItems, customerCode, customerNickname, customerLevel, customerType, thirdPartyCustomerCode, thirdPartyCustomerLevel, shippingWarehouse, destinationCountry, primaryGoodsType, secondaryGoodsType, goodsValue, composited, shippingMethod) ->
+        return mainInfo.mapWith((id, packageCode, trackingNumbers, spatialAttributes, serviceItems, customerCode, customerNickname, customerLevel, customerType, thirdPartyCustomerCode, thirdPartyCustomerLevel, shippingWarehouse, destinationCountry, primaryGoodsType, secondaryGoodsType, goodsValue, transportMethodCode, transportMethodName, composited, packageStatus, goodsInfos) ->
                 new PackageMainInfoEntity()
                         .setId(id)
                         .setPackageCode(packageCode)
@@ -26,13 +30,14 @@ public class PackageMainInfoConvertor {
                         .setPrimaryGoodsType(primaryGoodsType)
                         .setSecondaryGoodsType(secondaryGoodsType)
                         .setGoodsValue(goodsValue)
-                        .setComposited(composited)
-                        .setShippingMethod(shippingMethod));
+                        .setTransportMethodCode(thirdPartyCustomerCode)
+                        .setPackageStatus(packageStatus.toString())
+                        .setComposited(composited));
     }
 
-    public static PackageMainInfo convertToDomainEntity(PackageMainInfoEntity entity, List<PackageTrackingNumberEntity> packageTrackingNumberEntities, List<PackageSpatialAttributeEntity> packageSpatialAttributeEntities, List<PackageServiceItemEntity> packageServiceItemEntities) {
+    public static PackageMainInfo convertToDomainEntity(PackageMainInfoEntity entity, List<PackageTrackingNumberEntity> packageTrackingNumberEntities, List<PackageSpatialAttributeEntity> packageSpatialAttributeEntities, List<PackageServiceItemEntity> packageServiceItemEntities, List<PackageGoodsInfoEntity> packageGoodsInfos) {
 
-        return new PackageMainInfo(entity.getId(), entity.getPackageCode(), Optional.ofNullable(packageTrackingNumberEntities).map(entities -> entities.stream().map(PackageMainInfoConvertor::convertToDomainEntity).collect(Collectors.toList())).orElse(null), Optional.ofNullable(packageSpatialAttributeEntities).map(entities -> entities.stream().map(PackageMainInfoConvertor::convertToDomainEntity).collect(Collectors.toList())).orElse(null), Optional.ofNullable(packageServiceItemEntities).map(entities -> entities.stream().map(PackageMainInfoConvertor::convertToDomainEntity).collect(Collectors.toList())).orElse(null), entity.getCustomerCode(), entity.getCustomerNickname(), entity.getCustomerLevel(), entity.getCustomerType(), entity.getThirdPartyCustomerCode(), entity.getThirdPartyCustomerLevel(), entity.getShippingWarehouse(), entity.getDestinationCountry(), entity.getPrimaryGoodsType(), entity.getSecondaryGoodsType(), entity.getGoodsValue(), entity.getComposited(), entity.getShippingMethod());
+        return PackageMainInfoFactory.create(entity.getId(), entity.getPackageCode(), Optional.ofNullable(packageTrackingNumberEntities).map(entities -> entities.stream().map(PackageMainInfoConvertor::convertToDomainEntity).collect(Collectors.toList())).orElse(null), Optional.ofNullable(packageSpatialAttributeEntities).map(entities -> entities.stream().map(PackageMainInfoConvertor::convertToDomainEntity).collect(Collectors.toList())).orElse(null), Optional.ofNullable(packageServiceItemEntities).map(entities -> entities.stream().map(PackageMainInfoConvertor::convertToDomainEntity).collect(Collectors.toList())).orElse(null), entity.getCustomerCode(), entity.getCustomerNickname(), entity.getCustomerLevel(), entity.getCustomerType(), entity.getThirdPartyCustomerCode(), entity.getThirdPartyCustomerLevel(), entity.getShippingWarehouse(), entity.getDestinationCountry(), entity.getPrimaryGoodsType(), entity.getSecondaryGoodsType(), entity.getGoodsValue(), entity.getTransportMethodCode(), entity.getTransportMethodName(), PackageStatusEnum.valueOf(entity.getPackageStatus()), entity.getComposited(), Optional.ofNullable(packageGoodsInfos).map(list -> list.stream().map(PackageMainInfoConvertor::convertToDomainEntity).collect(Collectors.toList())).orElse(null));
     }
 
     public static PackageTrackingNumber convertToDomainEntity(PackageTrackingNumberEntity packageTrackingNumberEntity) {
@@ -105,7 +110,7 @@ public class PackageMainInfoConvertor {
     }
 
     public static PackageSpatialAttribute convertToDomainEntity(PackageSpatialAttributeEntity packageSpatialAttributeEntity) {
-        return new PackageSpatialAttribute(
+        return PackageSpatialAttributeFactory.create(
                 packageSpatialAttributeEntity.getId(),
                 packageSpatialAttributeEntity.getPackageCode(),
                 packageSpatialAttributeEntity.getLength(),
@@ -117,7 +122,7 @@ public class PackageMainInfoConvertor {
     }
 
     public static PackageServiceItem convertToDomainEntity(PackageServiceItemEntity packageServiceItemEntity) {
-        return new PackageServiceItem(
+        return PackageServiceItemFactory.create(
                 packageServiceItemEntity.getId(),
                 packageServiceItemEntity.getPackageCode(),
                 packageServiceItemEntity.getServiceType(),
@@ -125,5 +130,19 @@ public class PackageMainInfoConvertor {
                 packageServiceItemEntity.getFee(),
                 packageServiceItemEntity.getActivated(),
                 packageServiceItemEntity.getCreationTime());
+    }
+
+    public static PackageGoodsInfo convertToDomainEntity(PackageGoodsInfoEntity packageGoodsInfoEntity) {
+        return PackageGoodsInfoFactory.create(
+                packageGoodsInfoEntity.getId(),
+                packageGoodsInfoEntity.getPackageCode(),
+                packageGoodsInfoEntity.getProductName(),
+                packageGoodsInfoEntity.getGoodsType(),
+                packageGoodsInfoEntity.getGoodsType(),
+                packageGoodsInfoEntity.getSpecification(),
+                packageGoodsInfoEntity.getShipmentQuantity(),
+                packageGoodsInfoEntity.getUnitPrice(),
+                packageGoodsInfoEntity.getTotalPrice(),
+                packageGoodsInfoEntity.getImageUrl());
     }
 }

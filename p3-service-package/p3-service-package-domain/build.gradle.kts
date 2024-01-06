@@ -7,6 +7,7 @@ dependencies {
 //    基础框架依赖
     compileOnly("org.springframework:spring-context")
     compileOnly("com.baomidou:mybatis-plus-annotation")
+    compileOnly("com.baomidou:mybatis-plus-extension")
     compileOnly("org.springframework:spring-web")
     compileOnly("org.springframework:spring-tx")
 

@@ -43,6 +43,10 @@ public class CompositePackageTrackingNumber {
         return mapper.map(this.id, this.compositePackageCode, this.numberType, this.trackingNumber, this.creationTime);
     }
 
+    public CompositePackageTrackingNumberTypeEnum getNumberType() {
+        return CompositePackageTrackingNumberTypeEnum.valueOf(this.numberType);
+    }
+
     public String getTrackingNumber() {
         return this.trackingNumber;
     }

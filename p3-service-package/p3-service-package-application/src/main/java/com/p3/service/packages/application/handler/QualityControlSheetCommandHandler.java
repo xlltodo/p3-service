@@ -4,7 +4,9 @@ import com.p3.service.packages.application.assembler.QualityControlSheetAssemble
 import com.p3.service.packages.application.command.QualityControlSheetCommand;
 import com.p3.service.packages.application.query.PackageQualityControlSheetQuery;
 import com.p3.service.packages.application.result.QualityControlSheetResult;
+import com.p3.service.packages.domain.model.entity.PackageTrackingNumberTypeEnum;
 import com.p3.service.packages.domain.model.entity.QualityControlSheet;
+import com.p3.service.packages.domain.repository.IPackageMainInfoRepository;
 import com.p3.service.packages.domain.service.QualityControlSheetDomainService;
 import com.p3.service.packages.domain.service.common.IIdentityGenerator;
 import com.p3.service.packages.infrastructure.client.P3WmsClient;
@@ -18,7 +20,9 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.ObjectUtils;
 
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Slf4j
 @Component
@@ -26,6 +30,8 @@ public class QualityControlSheetCommandHandler {
 
     @Resource
     private QualityControlSheetDomainService qualityControlSheetDomainService;
+    @Resource
+    private IPackageMainInfoRepository packageMainInfoRepository;
     @Lazy
     @Resource
     private P3WmsClient p3WmsClient;
@@ -44,22 +50,28 @@ public class QualityControlSheetCommandHandler {
     public QualityControlSheet save(QualityControlSheetCommand command) {
 
         ForecastExpressDTO forecastExpress = Optional.ofNullable(p3WmsClient.getExpressBill(command.getExpressBillNumber())).map(P3ApiResult::getData).orElse(null);
-        if(ObjectUtils.isEmpty(forecastExpress)) {
+        if (ObjectUtils.isEmpty(forecastExpress)) {
             return null;
         }
         CustomerInfoDTO customerInfo = Optional.ofNullable(p3WmsClient.getCustomerInfo(forecastExpress.getCustomerCode(), forecastExpress.getThirdPartyCustomerCode())).map(P3ApiResult::getData).orElse(null);
-        if(ObjectUtils.isEmpty(customerInfo)) {
+        if (ObjectUtils.isEmpty(customerInfo)) {
             return null;
         }
         QualityControlSheet qualityControlSheet = QualityControlSheetAssembler.toEntity(identityGenerator.generateSnowflakeId(), command, forecastExpress, customerInfo);
-        return qualityControlSheetDomainService.createOrUpdate(qualityControlSheet) ? qualityControlSheet : null;
+        return qualityControlSheetDomainService.createOrUpdate(qualityControlSheet);
     }
 
     @Transactional(rollbackFor = Exception.class)
-    public String submit(QualityControlSheetCommand command) {
+    public List<String> submit(QualityControlSheetCommand command) {
 
         QualityControlSheet qualityControlSheet = this.save(command);
         qualityControlSheet.submitQualityControlSheet("", "");
-        return qualityControlSheetDomainService.submit(qualityControlSheet) ? qualityControlSheet.getUniqueIdentifier() : null;
+        if (qualityControlSheetDomainService.submit(qualityControlSheet)) {
+            return Optional.ofNullable(packageMainInfoRepository.listByExpressBillNumber(command.getExpressBillNumber())).map(packageMainInfos ->
+                            packageMainInfos.stream().map(packageMainInfo ->
+                                    packageMainInfo.getTrackingNumber(PackageTrackingNumberTypeEnum.CX_NUMBER)).collect(Collectors.toList()))
+                    .orElse(null);
+        }
+        return null;
     }
 }

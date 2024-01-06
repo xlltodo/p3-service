@@ -29,7 +29,7 @@ public class QualityControlSheetDomainService {
     }
 
     @Transactional(rollbackFor = Exception.class)
-    public Boolean create(QualityControlSheet qualityControlSheet) {
+    public QualityControlSheet create(QualityControlSheet qualityControlSheet) {
 
         qualityControlSheetPackageDomainService.cleanBySheetId(qualityControlSheet.getUniqueIdentifier());
         qualityControlSheetPackageDomainService.createBatch(qualityControlSheet.getPackages());
@@ -39,11 +39,11 @@ public class QualityControlSheetDomainService {
 
         qualityControlSheetGoodsInfoDomainService.cleanBySheetId(qualityControlSheet.getUniqueIdentifier());
         qualityControlSheetGoodsInfoDomainService.createBatch(qualityControlSheet.getGoodsInfos());
-        return packageQualityControlSheetRepository.create(qualityControlSheet);
+        return packageQualityControlSheetRepository.create(qualityControlSheet) ? qualityControlSheet : null;
     }
 
     @Transactional(rollbackFor = Exception.class)
-    public Boolean update(QualityControlSheet qualityControlSheet) {
+    public QualityControlSheet update(QualityControlSheet qualityControlSheet) {
 
         packageQualityControlSheetRepository.delete(qualityControlSheet.getExpressBillNumber());
         return this.create(qualityControlSheet);
@@ -51,7 +51,7 @@ public class QualityControlSheetDomainService {
 
 
     @Transactional(rollbackFor = Exception.class)
-    public Boolean createOrUpdate(QualityControlSheet qualityControlSheet) {
+    public QualityControlSheet createOrUpdate(QualityControlSheet qualityControlSheet) {
 
         if(packageQualityControlSheetRepository.checkExist(qualityControlSheet.getExpressBillNumber())) {
             return this.update(qualityControlSheet);
@@ -63,7 +63,7 @@ public class QualityControlSheetDomainService {
     @Transactional(rollbackFor = Exception.class)
     public Boolean submit(QualityControlSheet qualityControlSheet) {
         this.publishPackageDeliveryEvent(qualityControlSheet);
-        return this.createOrUpdate(qualityControlSheet);
+        return this.createOrUpdate(qualityControlSheet) != null;
     }
 
     public void publishPackageDeliveryEvent(QualityControlSheet qualityControlSheet) {

@@ -54,8 +54,14 @@ public class CompositePackageMainInfoEntity implements Serializable {
     /**
      * 运输方式
      */
-    @TableField(value = "transport_method")
-    private String transportMethod;
+    @TableField(value = "transport_method_code")
+    private String transportMethodCode;
+
+    /**
+     * 运输方式
+     */
+    @TableField(value = "transport_method_name")
+    private String transportMethodName;
 
     /**
      * 一级货品类型

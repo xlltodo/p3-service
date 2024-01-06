@@ -49,6 +49,9 @@ public class CompositePackageInfoResult implements Serializable {
     @Schema(description = "集包标识")
     private Integer composited;
 
-    @Schema(description = "运输方式")
-    private String shippingMethod;
+    @Schema(description = "运输方式CODE")
+    private String transportMethodCode;
+
+    @Schema(description = "运输方式名称")
+    private String transportMethodName;
 }

@@ -21,7 +21,7 @@ public class PackageTrackingNumberHandler {
 
     public Boolean addTrackingNumber(PackageAddTrackingNumberCommand command) {
 
-        PackageMainInfo packageMainInfo = packageMainInfoRepository.info(command.getCxNumber());
+        PackageMainInfo packageMainInfo = packageMainInfoRepository.infoByCxNumber(command.getCxNumber());
         String packageCode = packageMainInfo.getPackageCode();
         PackageTrackingNumber packageTrackingNumber = PackageTrackingNumberFactory.create(null, packageCode, command.getNumberType(), command.getTrackingNumber(), LocalDateTime.now());
 

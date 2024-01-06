@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.p3.service.packages.infrastructure.repository.mapper.PackageMainInfoMapper">
+
+    <select id="idPages" resultType="java.lang.String">
+        SELECT t1.id
+        FROM package_main_info t1
+        <if test="cxNumber != null and cxNumber != ''">
+            LEFT JOIN package_tracking_number t2 ON t1.package_code = t2.package_code
+        </if>
+        <where>
+            t1.package_status = #{packageStatus}
+            <if test="customerCode != null and customerCode != ''">
+                AND t1.customer_code = #{customerCode}
+            </if>
+            <if test="customerNickname != null and customerNickname != ''">
+                AND t1.customer_nickname LIKE CONCAT(#{customerNickname}, '%')
+            </if>
+        </where>
+        <if test="cxNumber != null and cxNumber != ''">
+            AND t2.number_type = 'CX_NUMBER'
+            AND t2.tracking_number = #{cxNumber}
+        </if>
+    </select>
+</mapper>

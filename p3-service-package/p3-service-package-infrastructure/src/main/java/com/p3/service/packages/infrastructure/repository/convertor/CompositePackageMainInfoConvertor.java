@@ -17,14 +17,15 @@ import java.util.stream.Collectors;
 public class CompositePackageMainInfoConvertor {
 
     public static CompositePackageMainInfoEntity convertToDataEntity(CompositePackageMainInfo mainInfo) {
-        return mainInfo.mapWith((id, compositePackageCode, compositeMethod, compositeQuantity, compositePackagingType, transportMethod, primaryGoodsType, secondaryGoodsType, packageAssociations) ->
+        return mainInfo.mapWith((id, compositePackageCode, compositeMethod, compositeQuantity, compositePackagingType, transportMethodCode, transportMethodName, primaryGoodsType, secondaryGoodsType, packageAssociations) ->
                 new CompositePackageMainInfoEntity()
                         .setId(id)
                         .setCompositePackageCode(compositePackageCode)
                         .setCompositeMethod(compositeMethod)
                         .setCompositeQuantity(compositeQuantity)
                         .setCompositePackagingType(compositePackagingType)
-                        .setTransportMethod(transportMethod)
+                        .setTransportMethodCode(transportMethodCode)
+                        .setTransportMethodName(transportMethodName)
                         .setPrimaryGoodsType(primaryGoodsType)
                         .setSecondaryGoodsType(secondaryGoodsType));
     }
@@ -79,7 +80,8 @@ public class CompositePackageMainInfoConvertor {
                 entity.getCompositeMethod(),
                 entity.getCompositeQuantity(),
                 entity.getCompositePackagingType(),
-                entity.getTransportMethod(),
+                entity.getTransportMethodCode(),
+                entity.getTransportMethodName(),
                 entity.getPrimaryGoodsType(),
                 entity.getSecondaryGoodsType(),
                 null,

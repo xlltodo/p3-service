@@ -1,22 +1,17 @@
 package com.p3.service.packages.application.assembler;
 
 import com.p3.service.packages.application.command.PackageAddTrackingNumberCommand;
-import com.p3.service.packages.application.result.PackageMainInfoResult;
-import com.p3.service.packages.application.result.PackageServiceItemResult;
-import com.p3.service.packages.application.result.PackageSpatialAttributesResult;
-import com.p3.service.packages.application.result.PackageTrackingNumberResult;
-import com.p3.service.packages.domain.model.entity.PackageMainInfo;
-import com.p3.service.packages.domain.model.entity.PackageServiceItem;
-import com.p3.service.packages.domain.model.entity.PackageSpatialAttribute;
-import com.p3.service.packages.domain.model.entity.PackageTrackingNumber;
+import com.p3.service.packages.application.result.*;
+import com.p3.service.packages.domain.model.entity.*;
 import com.p3.service.packages.domain.model.factory.PackageTrackingNumberFactory;
-import io.swagger.v3.oas.annotations.media.Schema;
 import org.springframework.util.CollectionUtils;
 import org.springframework.util.ObjectUtils;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 public class PackageMainInfoAssembler {
@@ -25,10 +20,7 @@ public class PackageMainInfoAssembler {
         if(ObjectUtils.isEmpty(packageMainInfo)) {
             return null;
         }
-        return packageMainInfo.mapWith((id, packageCode, trackingNumbers, spatialAttributes, serviceItems,
-                                        customerCode, customerNickname, customerLevel, customerType, thirdPartyCustomerCode, thirdPartyCustomerLevel,
-                                        shippingWarehouse, destinationCountry, primaryGoodsType,
-                                        secondaryGoodsType, goodsValue, composited, shippingMethod) -> {
+        return packageMainInfo.mapWith((id, packageCode, trackingNumbers, spatialAttributes, serviceItems, customerCode, customerNickname, customerLevel, customerType, thirdPartyCustomerCode, thirdPartyCustomerLevel, shippingWarehouse, destinationCountry, primaryGoodsType, secondaryGoodsType, goodsValue, transportMethodCode, transportMethodName, composited, packageStatus, goodsInfos) -> {
 
             List<PackageTrackingNumberResult> trackingNumberResults =
                     convertTrackingNumbers(trackingNumbers);
@@ -57,7 +49,11 @@ public class PackageMainInfoAssembler {
                     .setSecondaryGoodsType(secondaryGoodsType)
                     .setGoodsValue(goodsValue)
                     .setComposited(composited)
-                    .setShippingMethod(shippingMethod);
+                    .setTransportMethodCode(transportMethodCode)
+                    .setTransportMethodName(transportMethodName)
+                    .setComposited(composited)
+                    .setPackageStatus(packageStatus.toString())
+                    .setGoodsInfos(PackageMainInfoAssembler.convertGoodsInfoResults(goodsInfos));
         });
     }
 
@@ -78,7 +74,7 @@ public class PackageMainInfoAssembler {
 
     public static List<PackageTrackingNumberResult> convertTrackingNumbers(List<PackageTrackingNumber> trackingNumbers) {
         if(CollectionUtils.isEmpty(trackingNumbers)) {
-            return null;
+            return new ArrayList<>(0);
         }
         return trackingNumbers.stream()
                 .map(PackageMainInfoAssembler::toResult).collect(Collectors.toList());
@@ -99,7 +95,7 @@ public class PackageMainInfoAssembler {
 
     public static List<PackageSpatialAttributesResult> convertSpatialAttributes(List<PackageSpatialAttribute> spatialAttribute) {
         if(CollectionUtils.isEmpty(spatialAttribute)) {
-            return null;
+            return new ArrayList<>(0);
         }
         return spatialAttribute.stream()
                 .map(PackageMainInfoAssembler::convertSpatialAttribute).collect(Collectors.toList());
@@ -119,9 +115,32 @@ public class PackageMainInfoAssembler {
 
     public static List<PackageServiceItemResult> convertServiceItems(List<PackageServiceItem> serviceItems) {
         if(CollectionUtils.isEmpty(serviceItems)) {
-            return null;
+            return new ArrayList<>(0);
         }
         return serviceItems.stream()
                 .map(PackageMainInfoAssembler::convertServiceItem).collect(Collectors.toList());
     }
+
+    public static PackageGoodsInfoResult convertGoodsInfoResult(PackageGoodsInfo packageGoodsInfo) {
+
+        return packageGoodsInfo.mapWith((String id, String packageCode, String productName, String goodsName, String goodsType, String specification,
+                                         Integer shipmentQuantity, BigDecimal unitPrice, BigDecimal totalPrice, String imageUrl) ->
+                new PackageGoodsInfoResult()
+                        .setId(id)
+                        .setPackageCode(packageCode)
+                        .setProductName(productName)
+                        .setGoodsName(goodsName)
+                        .setGoodsType(goodsType)
+                        .setSpecification(specification)
+                        .setShipmentQuantity(shipmentQuantity)
+                        .setUnitPrice(unitPrice)
+                        .setTotalPrice(totalPrice)
+                        .setImageUrl(imageUrl)
+        );
+    }
+
+    public static List<PackageGoodsInfoResult> convertGoodsInfoResults(List<PackageGoodsInfo> packageGoodsInfos) {
+        return Optional.ofNullable(packageGoodsInfos).map(list -> list.stream().map(PackageMainInfoAssembler::convertGoodsInfoResult).collect(Collectors.toList())).orElse(new ArrayList<>(0));
+    }
+
 }
